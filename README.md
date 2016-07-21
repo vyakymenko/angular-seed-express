@@ -70,6 +70,24 @@ _Does not rely on any global dependencies._
 - [Change Log](#change-log)
 - [License](#license)
 
+
+# Express Server
+Express server run for prod build.
+
+```js
+$ node app.server.js
+```
+
+For daemonize i propose to uze `PM2`.
+```js
+# default daemon
+$ pm2 start app.server.js
+
+# in cluster mode ( example 4 workers )
+$ pm2 start app.server.js -i 4
+
+```
+
 # Configuration
 
 Default application server configuration

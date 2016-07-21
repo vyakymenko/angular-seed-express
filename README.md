@@ -77,6 +77,10 @@ _Does not rely on any global dependencies._
 Express server run for prod build.
 
 ```js
+# before run (important)
+$ npm build.prod
+
+# run server
 $ node app.server.js
 ```
 
@@ -84,6 +88,8 @@ $ node app.server.js
 
 For daemonize i propose to uze `PM2`.
 ```js
+# before daemonize (important)
+$ npm build.prod
 
 # default daemon
 $ pm2 start app.server.js

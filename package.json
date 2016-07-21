@@ -1,9 +1,9 @@
 {
-  "name": "angular2-seed",
+  "name": "angular2-seed-express",
   "version": "0.0.0",
-  "description": "Modular seed project for Angular 2 apps with fast, statically typed build",
+  "description": "Express seed for Angular2 apps",
   "repository": {
-    "url": "https://github.com/mgechev/angular2-seed"
+    "url": "https://github.com/vyakymenko/angular2-seed-express.git"
   },
   "scripts": {
     "build.dev": "gulp build.dev --color",

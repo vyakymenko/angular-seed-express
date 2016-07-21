@@ -23,8 +23,8 @@ app.use('/assets', express.static(path.resolve(__dirname, 'dist/prod/assets')));
 
 /**
  * Spa Res Sender.
- * @param req
- * @param res
+ * @param req {any}
+ * @param res {any}
  */
 var renderIndex = function(req, res) {
   res.sendFile(path.resolve(__dirname, 'dist/prod/index.html'));
@@ -37,7 +37,6 @@ app.get('/*', renderIndex);
 
 /**
  * Server with gzip compression.
- * @type {http.Server}
  */
 var server = app.listen(port, function() {
   var port = server.address().port;

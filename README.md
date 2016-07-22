@@ -77,20 +77,6 @@ More details about [PM2](http://pm2.keymetrics.io/)
 # Your Angular.io NginX .conf
 ##
 
-
-##
-# Daemon Errors Workers
-##
-daemon off;
-error_log /dev/error_log error;
-
-worker_processes 4;
-
-events {
-  worker_connections 1024;
-}
-
-
 http {
   log_format gzip '[$time_local] ' '"$request" $status $bytes_sent';
   access_log /dev/stdout;

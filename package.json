@@ -100,7 +100,7 @@
     "tildify": "^1.2.0",
     "tiny-lr": "^0.2.1",
     "traceur": "^0.0.111",
-    "ts-node": "^0.9.3",
+    "ts-node": "^1.0.0",
     "tslint": "^3.13.0",
     "tslint-stylish": "2.1.0-beta",
     "typescript": "~1.8.10",

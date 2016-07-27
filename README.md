@@ -39,10 +39,12 @@ npm run build.dev
 npm run build.prod
 
 # run Express server (keep in touch, only after `npm run build.prod` )
-$ node app.server.js
+$ node app.server.prod.js
+# or
+$ node app.server.dev.js
 
 # ren server in daemon mode
-$ pm2 start app.server.js
+$ pm2 start app.server.prod.js
 ```
 
 # Need to know
@@ -61,6 +63,9 @@ Express server run for prod build.
 # run Express server (keep in touch, only after `npm run build.prod` )
 # keep in mind that prod build will be builded with prod env flag
 $ node app.server.prod.js
+
+# run Express server in dev moe
+$ node app.server.dev.js
 ```
 
 # Daemonize Server

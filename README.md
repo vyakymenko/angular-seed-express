@@ -163,9 +163,34 @@ http {
 
 You can look in source file [here](https://github.com/vyakymenko/angular2-nginx-config-example/blob/master/ng2-application.conf).
 
+
+
 # Express Configuration
 
-To be continued...
+`server/index.js`
+
+```js
+var port = 9000, // Server Port ( keep in mind that this important if you will use reverse-proxy)
+    _proddir = '../dist/prod'; // Dist prod folder.
+```
+
+# Reverse Proxy NginX Config Example
+```
+server {
+    listen 80;
+
+    server_name www.example.com example.com;
+
+    location / {
+        proxy_pass http://example.com:9000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+```
 
 
 # Contributors

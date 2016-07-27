@@ -4,7 +4,7 @@ var
   compression = require('compression');
 
 var port = 9000,
-    _proddir = '../dist/prod',
+    _proddir = '../dist/prod';
     app = express();
 
 var ServerInit = function () {
@@ -14,7 +14,7 @@ var ServerInit = function () {
   /**
    * Api Routes.
    */
-
+  require('./routes')(app);
 
 
   /**

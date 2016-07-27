@@ -45,13 +45,22 @@ $ node app.server.js
 $ pm2 start app.server.js
 ```
 
+# Need to know
+
+Before starting development. Run you development server:
+```sh
+# run dev server
+$ node app.server.dev.js
+```
+
 # Express Server
 
 Express server run for prod build.
 
 ```sh
 # run Express server (keep in touch, only after `npm run build.prod` )
-$ node app.server.js
+# keep in mind that prod build will be builded with prod env flag
+$ node app.server.prod.js
 ```
 
 # Daemonize Server
@@ -59,13 +68,13 @@ $ node app.server.js
 For daemonize i propose to uze `PM2`.
 ```sh
 # before daemonize server `npm run build.prod`
-$ pm2 start app.server.js
+$ pm2 start app.server.prod.js
 
 # restart daemon
 $ pm2 restart all
 
 # in cluster mode ( example 4 workers )
-$ pm2 start app.server.js -i 4
+$ pm2 start app.server.prod.js -i 4
 
 ```
 More details about [PM2](http://pm2.keymetrics.io/)
@@ -181,7 +190,7 @@ var _proddir = '../dist/prod'; // Dist prod folder.
 /**
  * @ng2 Server Runner `Development`.
  */
-require('./server')('dev', 9001);
+require('./server')(9001, 'dev');
 ```
 
 `app.server.prod.js`
@@ -214,7 +223,6 @@ server {
     }
 }
 ```
-
 
 # Contributors
 

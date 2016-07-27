@@ -3,6 +3,6 @@
     "API": "http://localhost:9001"
   },
   "prod": {
-    "API": "http://localhost:9000"
+    "API": ""
   }
 }

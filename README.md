@@ -179,9 +179,11 @@ var port = 9000, // Server Port ( keep in mind that this important if you will u
 server {
     listen 80;
 
+    # App Web Adress Listener
     server_name www.example.com example.com;
 
     location / {
+        # Port where we have our daemon `pm2 start app.server.js`
         proxy_pass http://example.com:9000;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;

@@ -170,8 +170,29 @@ You can look in source file [here](https://github.com/vyakymenko/angular2-nginx-
 `server/index.js`
 
 ```js
-var port = 9000, // Server Port ( keep in mind that this important if you will use reverse-proxy)
-    _proddir = '../dist/prod'; // Dist prod folder.
+var _proddir = '../dist/prod'; // Dist prod folder.
+```
+
+`app.server.dev.js`
+```js
+// Configure server Port ( keep in mind that this important if you will use reverse-proxy)
+// Dev mode will give you only middleware.
+// WARNING! DEPEND ON YOUR Angular2 SEED PROJECT API CONFIG!
+/**
+ * @ng2 Server Runner `Development`.
+ */
+require('./server')('dev', 9001);
+```
+
+`app.server.prod.js`
+```js
+// Configure server Port ( keep in mind that this important if you will use reverse-proxy)
+// Prod mode give you middleware + static.
+// WARNING! DEPEND ON YOUR Angular2 SEED PROJECT API CONFIG!
+/**
+ * @ng2 Server Runner `Production`.
+ */
+require('./server')(9000);
 ```
 
 # Reverse Proxy NginX Config Example

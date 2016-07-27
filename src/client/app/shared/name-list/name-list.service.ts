@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
+import { Config } from '../index';
+
 /**
  * This class provides the NameList service with methods to read names and add names.
  */
@@ -22,7 +24,7 @@ export class NameListService {
    * @return {string[]} The Observable for the HTTP request.
    */
   get(): Observable<string[]> {
-    return this.http.get('/assets/data.json')
+    return this.http.get(`${Config.API}/api/name-list`)
                     .map((res: Response) => res.json())
                     .catch(this.handleError);
   }

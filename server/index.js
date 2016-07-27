@@ -1,14 +1,15 @@
 var
   express = require('express'),
+  bodyParser = require('body-parser'),
   path = require('path'),
   compression = require('compression');
 
-var port = 9000,
-    _proddir = '../dist/prod';
+var _proddir = '../dist/prod';
     app = express();
 
-var ServerInit = function () {
+module.exports = function (port, mode) {
 
+  app.use(bodyParser.json());
   app.use(compression());
 
   /**
@@ -16,27 +17,44 @@ var ServerInit = function () {
    */
   require('./routes')(app);
 
-
   /**
-   * Static.
+   * Dev Mode.
+   * @note Dev server will only give for you middleware.
    */
-  app.use('/js', express.static(path.resolve(__dirname, _proddir+'/js')));
-  app.use('/css', express.static(path.resolve(__dirname, _proddir+'/css')));
-  app.use('/assets', express.static(path.resolve(__dirname, _proddir+'/assets')));
+  if (mode == 'dev'){
+    app.all('/*', function(req, res, next) {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers", "X-Requested-With");
+      next();
+    });
+  }
+  else {
+    /**
+     * Prod Mode.
+     * @note Prod mod will give you static + middleware.
+     */
 
-  /**
-   * Spa Res Sender.
-   * @param req {any}
-   * @param res {any}
-   */
-  var renderIndex = function(req, res) {
-    res.sendFile(path.resolve(__dirname, _proddir+'/index.html'));
-  };
+    /**
+     * Static.
+     */
+    app.use('/js', express.static(path.resolve(__dirname, _proddir+'/js')));
+    app.use('/css', express.static(path.resolve(__dirname, _proddir+'/css')));
+    app.use('/assets', express.static(path.resolve(__dirname, _proddir+'/assets')));
 
-  /**
-   * Prevent server routing and use @ng2-router.
-   */
-  app.get('/*', renderIndex);
+    /**
+     * Spa Res Sender.
+     * @param req {any}
+     * @param res {any}
+     */
+    var renderIndex = function(req, res) {
+      res.sendFile(path.resolve(__dirname, _proddir+'/index.html'));
+    };
+
+    /**
+     * Prevent server routing and use @ng2-router.
+     */
+    app.get('/*', renderIndex);
+  }
 
   /**
    * Server with gzip compression.
@@ -47,5 +65,3 @@ var ServerInit = function () {
   });
 
 };
-
-module.exports = ServerInit;

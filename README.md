@@ -229,9 +229,26 @@ server {
 }
 ```
 
+# Redis Download/Install
+
+ - About [Redis](http://redis.io/).
+ - [Download](http://redis.io/download#download) and [install](http://redis.io/download#installation) latest stable version of Redis.
+ - [Documentation](http://redis.io/documentation) about Redis.
+
+# Redis Start
+
+After installation we need to start our server:
+```sh
+# start server
+$ src/redis-server
+
+# daemon server
+# will be in future
+```
+
 # TODO:
 
- - Add Redis integration.
+ - Add daemon for Redis.
 
 # Contributors
 

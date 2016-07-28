@@ -13,11 +13,6 @@ module.exports = function (port, mode) {
   app.use(compression());
 
   /**
-   * Api Routes.
-   */
-  require('./routes')(app);
-
-  /**
    * Dev Mode.
    * @note Dev server will only give for you middleware.
    */
@@ -55,6 +50,11 @@ module.exports = function (port, mode) {
      */
     app.get('/*', renderIndex);
   }
+
+  /**
+   * Api Routes.
+   */
+  require('./routes')(app);
 
   /**
    * Server with gzip compression.

@@ -22,12 +22,22 @@ module.exports = function (port, mode) {
       res.header("Access-Control-Allow-Headers", "X-Requested-With");
       next();
     });
+
+    /**
+     * Api Routes for `Development`.
+     */
+    require('./routes')(app);
   }
   else {
     /**
      * Prod Mode.
      * @note Prod mod will give you static + middleware.
      */
+
+    /**
+     * Api Routes for `Production`.
+     */
+    require('./routes')(app);
 
     /**
      * Static.
@@ -50,11 +60,6 @@ module.exports = function (port, mode) {
      */
     app.get('/*', renderIndex);
   }
-
-  /**
-   * Api Routes.
-   */
-  require('./routes')(app);
 
   /**
    * Server with gzip compression.

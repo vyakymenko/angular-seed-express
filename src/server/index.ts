@@ -1,13 +1,14 @@
-var
-  express = require('express'),
-  bodyParser = require('body-parser'),
-  path = require('path'),
-  compression = require('compression');
 
-var _proddir = '../dist/prod';
-    app = express();
+import * as express from 'express';
+import * as bodyParser from 'body-parser';
+import * as path from 'path';
+import * as compression from 'compression';
+import * as routes from './routes';
 
-module.exports = function (port, mode) {
+var _proddir = "../client";
+var app = express();
+
+export = function (port: number, mode: string) {
 
   app.use(bodyParser.json());
   app.use(compression());
@@ -26,7 +27,7 @@ module.exports = function (port, mode) {
     /**
      * Api Routes for `Development`.
      */
-    require('./routes')(app);
+    routes.init(app);
   }
   else {
     /**
@@ -37,21 +38,21 @@ module.exports = function (port, mode) {
     /**
      * Api Routes for `Production`.
      */
-    require('./routes')(app);
+    routes.init(app);
 
     /**
      * Static.
      */
-    app.use('/js', express.static(path.resolve(__dirname, _proddir+'/js')));
-    app.use('/css', express.static(path.resolve(__dirname, _proddir+'/css')));
-    app.use('/assets', express.static(path.resolve(__dirname, _proddir+'/assets')));
+    app.use('/client/js', express.static(path.resolve(__dirname, _proddir + '/js')));
+    app.use('/client/css', express.static(path.resolve(__dirname, _proddir + '/css')));
+    app.use('/client/assets', express.static(path.resolve(__dirname, _proddir + '/assets')));
 
     /**
      * Spa Res Sender.
      * @param req {any}
      * @param res {any}
      */
-    var renderIndex = function(req, res) {
+    var renderIndex = function(req: express.Request, res: express.Response) {
       res.sendFile(path.resolve(__dirname, _proddir+'/index.html'));
     };
 

@@ -20,6 +20,8 @@ gulp.task('build.dev', (done: any) =>
               'build.html_css',
               'build.js.dev',
               'build.index.dev',
+              'build.server.dev',
+              'copy.server.assets',
               done));
 
 // --------------
@@ -47,11 +49,14 @@ gulp.task('build.prod', (done: any) =>
               'css-lint',
               'build.assets.prod',
               'build.html_css',
-              'copy.js.prod',
+              'copy.client.js.prod',
+              'copy.server.js.prod',
               'build.js.prod',
               'build.bundles',
               'build.bundles.app',
               'build.index.prod',
+              'build.server.prod',
+              'copy.server.assets',
               done));
 
 // --------------

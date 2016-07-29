@@ -1,4 +1,4 @@
 /**
  * @ng2 Server Runner `Production`.
  */
-require('./server')(9000);
+require('./dist/prod/server')(9000);

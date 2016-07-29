@@ -39,6 +39,8 @@ gulp.task('build.e2e', (done: any) =>
               'build.assets.dev',
               'build.js.e2e',
               'build.index.dev',
+              'build.server.dev',
+              'copy.server.assets',
               done));
 
 // --------------

@@ -18,7 +18,7 @@ let listen = () => {
   //   ng2HotLoader.listen({
   //     port: HOT_LOADER_PORT,
   //     processPath: file => {
-  //       return file.replace(join(PROJECT_ROOT, APP_SRC), join('dist', 'dev'));
+  //       return file.replace(join(PROJECT_ROOT, APP_CLIENT_SRC), join('dist', 'dev'));
   //     }
   //   });
   // }

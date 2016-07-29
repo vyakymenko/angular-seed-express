@@ -7,7 +7,7 @@ import * as reporter from 'postcss-reporter';
 import * as stylelint from 'stylelint';
 import { join } from 'path';
 
-import { APP_ASSETS, APP_SRC, BROWSER_LIST, CSS_SRC, ENV, DEPENDENCIES, ENABLE_SCSS,  COLOR_GUARD_WHITE_LIST} from '../../config';
+import { APP_ASSETS, APP_CLIENT_SRC, BROWSER_LIST, CSS_SRC, ENV, DEPENDENCIES, ENABLE_SCSS,  COLOR_GUARD_WHITE_LIST} from '../../config';
 
 const plugins = <any>gulpLoadPlugins();
 
@@ -27,8 +27,8 @@ const processors = [
 
 function lintComponentStylesheets() {
   return gulp.src([
-    join(APP_SRC, '**', `*.${stylesheetType}`),
-    `!${join(APP_SRC, 'assets', '**', '*.scss')}`,
+    join(APP_CLIENT_SRC, '**', `*.${stylesheetType}`),
+    `!${join(APP_CLIENT_SRC, 'assets', '**', '*.scss')}`,
     `!${join(CSS_SRC, '**', '*.css')}`
   ]).pipe(isProd ? plugins.cached('css-lint') : plugins.util.noop())
     .pipe(ENABLE_SCSS ? plugins.sassLint() : plugins.postcss(processors))

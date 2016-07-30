@@ -2,7 +2,7 @@ import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import { join } from 'path';
 
-import { APP_DEST, APP_SRC, TOOLS_DIR } from '../../config';
+import { APP_CLIENT_DEST, APP_CLIENT_SRC, TOOLS_DIR } from '../../config';
 import { makeTsProject, templateLocals } from '../../utils';
 
 const plugins = <any>gulpLoadPlugins();
@@ -16,8 +16,8 @@ export = () => {
   let src = [
     'typings/index.d.ts',
     TOOLS_DIR + '/manual_typings/**/*.d.ts',
-    join(APP_SRC, '**/*.ts'),
-    '!' + join(APP_SRC, '**/*.spec.ts')
+    join(APP_CLIENT_SRC, '**/*.ts'),
+    '!' + join(APP_CLIENT_SRC, '**/*.spec.ts')
   ];
   let result = gulp.src(src)
     .pipe(plugins.plumber())
@@ -27,5 +27,5 @@ export = () => {
   return result.js
     .pipe(plugins.sourcemaps.write())
     .pipe(plugins.template(templateLocals()))
-    .pipe(gulp.dest(APP_DEST));
+    .pipe(gulp.dest(APP_CLIENT_DEST));
 };

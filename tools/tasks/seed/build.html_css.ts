@@ -7,15 +7,15 @@ import * as util from 'gulp-util';
 import { join } from 'path';
 
 import {
-  APP_DEST,
-  APP_SRC,
+  APP_CLIENT_DEST,
+  APP_CLIENT_SRC,
   BROWSER_LIST,
   CSS_DEST,
   CSS_SRC,
   DEPENDENCIES,
   ENABLE_SCSS,
   ENV,
-  TMP_DIR,
+  TMP_CLIENT_DIR,
   getPluginConfig,
 } from '../../config';
 
@@ -48,8 +48,8 @@ if (isProd) {
  * Copies all HTML files in `src/client` over to the `dist/tmp` directory.
  */
 function prepareTemplates() {
-  return gulp.src(join(APP_SRC, '**', '*.html'))
-    .pipe(gulp.dest(TMP_DIR));
+  return gulp.src(join(APP_CLIENT_SRC, '**', '*.html'))
+    .pipe(gulp.dest(TMP_CLIENT_DIR));
 }
 
 /**
@@ -63,7 +63,7 @@ function processComponentStylesheets() {
  * Process scss files referenced from Angular component `styleUrls` metadata
  */
 function processComponentScss() {
-  return gulp.src(join(APP_SRC, '**', '*.scss'))
+  return gulp.src(join(APP_CLIENT_SRC, '**', '*.scss'))
     .pipe(isProd ? plugins.cached('process-component-scss') : plugins.util.noop())
     .pipe(isProd ? plugins.progeny() : plugins.util.noop())
     .pipe(plugins.sourcemaps.init())
@@ -71,7 +71,7 @@ function processComponentScss() {
     .pipe(plugins.postcss(processors))
     .on('error', reportPostCssError)
     .pipe(plugins.sourcemaps.write(isProd ? '.' : ''))
-    .pipe(gulp.dest(isProd ? TMP_DIR : APP_DEST));
+    .pipe(gulp.dest(isProd ? TMP_CLIENT_DIR : APP_CLIENT_DEST));
 }
 
 /**
@@ -80,13 +80,13 @@ function processComponentScss() {
  */
 function processComponentCss() {
   return gulp.src([
-    join(APP_SRC, '**', '*.css'),
-    '!' + join(APP_SRC, 'assets', '**', '*.css')
+    join(APP_CLIENT_SRC, '**', '*.css'),
+    '!' + join(APP_CLIENT_SRC, 'assets', '**', '*.css')
   ])
     .pipe(isProd ? plugins.cached('process-component-css') : plugins.util.noop())
     .pipe(plugins.postcss(processors))
     .on('error', reportPostCssError)
-    .pipe(gulp.dest(isProd ? TMP_DIR : APP_DEST));
+    .pipe(gulp.dest(isProd ? TMP_CLIENT_DIR : APP_CLIENT_DEST));
 }
 
 /**

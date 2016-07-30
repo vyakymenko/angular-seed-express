@@ -1,20 +1,9 @@
-import * as express from 'express';
-import * as history from 'express-history-api-fallback';
 import * as gulp from 'gulp';
-import { resolve } from 'path';
 import { protractor } from 'gulp-protractor';
 
 class Protractor {
-  server(port: number, dir: string) {
-    let app = express();
-    let root = resolve(process.cwd(), dir);
-    app.use(express.static(root));
-    app.use(history('index.html', { root }));
-    return new Promise((resolve, reject) => {
-      let server = app.listen(port, () => {
-        resolve(server);
-      });
-    });
+  server(port: number) {
+      return require('../../../dist/dev/server').init(port, 'dev');
   }
 }
 
@@ -23,7 +12,7 @@ class Protractor {
  */
 export = (done: any) => {
   new Protractor()
-    .server(5555, './dist/prod')
+    .server(9001)
     .then((server: any) => {
       gulp
         .src('./dist/dev/**/*.e2e-spec.js')

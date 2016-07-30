@@ -6,7 +6,7 @@ import {
   JS_PROD_APP_BUNDLE,
   JS_DEST,
   SYSTEM_BUILDER_CONFIG,
-  TMP_DIR
+  TMP_CLIENT_DIR
 } from '../../config';
 
 const BUNDLER_OPTIONS = {
@@ -21,7 +21,7 @@ const BUNDLER_OPTIONS = {
 export = (done: any) => {
   let builder = new Builder(SYSTEM_BUILDER_CONFIG);
   builder
-    .buildStatic(join(TMP_DIR, BOOTSTRAP_MODULE),
+    .buildStatic(join(TMP_CLIENT_DIR, BOOTSTRAP_MODULE),
                  join(JS_DEST, JS_PROD_APP_BUNDLE),
                  BUNDLER_OPTIONS)
     .then(() => done())

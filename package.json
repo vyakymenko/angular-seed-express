@@ -28,8 +28,6 @@
     "tasks.list": "gulp --tasks-simple --color",
     "test": "gulp test --color",
     "e2e.ci": "gulp build.prod --color && gulp build.js.e2e --color && gulp e2e --color",
-    "dev.server.run.exp": "node app.server.dev.js --color",
-    "tests.all.exp": "npm run dev.server.run.exp --postmyscript | npm test | npm run e2e.ci",
     "tests.all": "npm test && npm run e2e.ci",
     "webdriver-start": "webdriver-manager start",
     "webdriver-update": "webdriver-manager update"

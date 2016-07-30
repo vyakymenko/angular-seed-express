@@ -1,4 +1,4 @@
 /**
  * @ng2 Server Runner `Development`.
  */
-require('./server')(9001, 'dev');
+require('./dist/dev/server').init(9001, 'dev');

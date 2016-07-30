@@ -5,8 +5,8 @@ import * as slash from 'slash';
 
 import {
   APP_BASE,
-  APP_DEST,
-  APP_SRC,
+  APP_CLIENT_DEST,
+  APP_CLIENT_SRC,
   CSS_DEST,
   CSS_PROD_BUNDLE,
   JS_DEST,
@@ -22,11 +22,11 @@ const plugins = <any>gulpLoadPlugins();
  * environment.
  */
 export = () => {
-  return gulp.src(join(APP_SRC, 'index.html'))
+  return gulp.src(join(APP_CLIENT_SRC, 'index.html'))
     .pipe(injectJs())
     .pipe(injectCss())
     .pipe(plugins.template(templateLocals()))
-    .pipe(gulp.dest(APP_DEST));
+    .pipe(gulp.dest(APP_CLIENT_DEST));
 };
 
 /**
@@ -61,7 +61,7 @@ function injectCss() {
 function transformPath() {
   return function(filepath: string) {
     let path: Array<string> = normalize(filepath).split(sep);
-    arguments[0] = APP_BASE + path.slice(3, path.length).join(sep) + `?${Date.now()}`;
+    arguments[0] = APP_BASE + path.slice(4, path.length).join(sep) + `?${Date.now()}`;
     return slash(plugins.inject.transform.apply(plugins.inject.transform, arguments));
   };
 }

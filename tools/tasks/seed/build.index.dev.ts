@@ -3,7 +3,7 @@ import * as gulpLoadPlugins from 'gulp-load-plugins';
 import { join } from 'path';
 import * as slash from 'slash';
 
-import { APP_BASE, APP_DEST, APP_SRC, DEPENDENCIES, CSS_DEST, ASSETS_SRC } from '../../config';
+import { APP_BASE, APP_CLIENT_DEST, APP_CLIENT_SRC, DEPENDENCIES, CSS_DEST, ASSETS_SRC } from '../../config';
 import { templateLocals } from '../../utils';
 
 const plugins = <any>gulpLoadPlugins();
@@ -13,12 +13,12 @@ const plugins = <any>gulpLoadPlugins();
  * Executes the build process, injecting the shims and libs into the `index.hml` for the development environment.
  */
 export = () => {
-  return gulp.src(join(APP_SRC, 'index.html'))
+  return gulp.src(join(APP_CLIENT_SRC, 'index.html'))
     .pipe(inject('shims'))
     .pipe(inject('libs'))
     .pipe(inject())
     .pipe(plugins.template(templateLocals()))
-    .pipe(gulp.dest(APP_DEST));
+    .pipe(gulp.dest(APP_CLIENT_DEST));
 };
 
 /**
@@ -48,9 +48,9 @@ function getInjectablesDependenciesRef(name?: string) {
  */
 function mapPath(dep: any) {
   let envPath = dep.src;
-  if (envPath.startsWith(APP_SRC) && !envPath.endsWith('.scss')) {
-    envPath = join(APP_DEST, envPath.replace(APP_SRC, ''));
-  } else if (envPath.startsWith(APP_SRC) && envPath.endsWith('.scss')) {
+  if (envPath.startsWith(APP_CLIENT_SRC) && !envPath.endsWith('.scss')) {
+    envPath = join(APP_CLIENT_DEST, envPath.replace(APP_CLIENT_SRC, ''));
+  } else if (envPath.startsWith(APP_CLIENT_SRC) && envPath.endsWith('.scss')) {
     envPath = envPath.replace(ASSETS_SRC, CSS_DEST).replace('.scss', '.css');
   }
   return envPath;

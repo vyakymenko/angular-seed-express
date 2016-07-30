@@ -5,7 +5,7 @@ import { resolve } from 'path';
 import * as serveStatic from 'serve-static';
 
 import * as codeChangeTool from './code_change_tools';
-import { APP_BASE, COVERAGE_PORT, DOCS_DEST, DOCS_PORT, PORT, PROD_DEST } from '../../config';
+import { APP_BASE, COVERAGE_PORT, DOCS_DEST, DOCS_PORT, PORT, PROD_CLIENT_DEST } from '../../config';
 
 /**
  * Serves the Single Page Application. More specifically, calls the `listen` method, which itself launches BrowserSync.
@@ -62,7 +62,7 @@ export function serveCoverage() {
  * Starts a new `express` server, serving the built files from `dist/prod`.
  */
 export function serveProd() {
-  let root = resolve(process.cwd(), PROD_DEST);
+  let root = resolve(process.cwd(), PROD_CLIENT_DEST);
   let server = express();
   let compression = require('compression');
       server.use(compression());

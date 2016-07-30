@@ -12,7 +12,9 @@ var app = express();
 
 export function init(port: number, mode: string) {
 
+  app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
+  app.use(bodyParser.text());
   app.use(compression());
 
   // DB Init

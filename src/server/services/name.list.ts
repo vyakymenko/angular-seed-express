@@ -28,6 +28,9 @@ export function nameList(app: express.Application) {
 
       RedisClient.smembers('name-list',
         (err:any, replies:any) => {
+          console.log(`
+          Reply length: ${replies.length}. 
+          Reply: ${replies}.`);
           nameList = replies;
           res.json(nameList);
       });
@@ -43,10 +46,16 @@ export function nameList(app: express.Application) {
     (req:any, res:any, next:any) => {
 
       let RedisClient = redis.createClient(),
-          user = JSON.parse(req.body);
+          request = req.body;
+          // request = JSON.parse(req.body);
 
-      RedisClient.sadd('name-list', user.name,
+      console.log(req);
+
+      RedisClient.sadd('name-list', request.name,
         (err:any, replies:any) => {
+          console.log(`
+          Reply length: ${replies.length}. 
+          Reply: ${replies}.`);
 
           res.json({success: true});
         });
@@ -62,10 +71,16 @@ export function nameList(app: express.Application) {
     (req:any, res:any, next:any) => {
 
       let RedisClient = redis.createClient(),
-          user = JSON.parse(req.body);
+          request = req.body;
+          // request = JSON.parse(req.body);
 
-      RedisClient.srem('name-list', user.name,
+      console.log(req);
+
+      RedisClient.srem('name-list', request.name,
         (err:any, replies:any) => {
+          console.log(`
+          Reply length: ${replies.length}. 
+          Reply: ${replies}.`);
 
           res.json({success: true});
         });

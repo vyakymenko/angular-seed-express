@@ -77,7 +77,7 @@ export class SeedConfig {
    * which can be overriden by the `--base` flag when running `npm start`.
    * @type {string}
    */
-  APP_BASE = argv['base'] || (this.ENV === ENVIRONMENTS.DEVELOPMENT ? '/' : '');
+  APP_BASE = argv['base'] || '/';
 
   /**
    * The base path of node modules.

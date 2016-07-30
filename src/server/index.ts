@@ -18,14 +18,14 @@ export function init(port: number, mode: string) {
    * @note Dev server will only give for you middleware.
    */
   if (mode == 'dev') {
-    routes.init(app);
-
     app.all('/*', function(req, res, next) {
       res.header("Access-Control-Allow-Origin", "*");
       res.header("Access-Control-Allow-Headers", "X-Requested-With");
       next();
     });
-    
+
+    routes.init(app);
+
     let root = path.resolve(process.cwd());
     let clientRoot = path.resolve(process.cwd(), './dist/dev/client')
     app.use(express.static(root));

@@ -1,7 +1,6 @@
 import * as express from 'express';
 import * as redis from 'redis';
 
-// For static data
 let nameData = require('../data/name.list.json');
 
 export function nameList(app: express.Application) {
@@ -24,7 +23,7 @@ export function nameList(app: express.Application) {
     (req:any, res:any, next:any) => {
 
       let RedisClient = redis.createClient(),
-          nameList = [];
+          nameList: string[] = [];
 
       RedisClient.smembers('name-list',
         (err:any, replies:any) => {
@@ -49,12 +48,9 @@ export function nameList(app: express.Application) {
           request = req.body;
           // request = JSON.parse(req.body);
 
-      console.log(req);
-
       RedisClient.sadd('name-list', request.name,
         (err:any, replies:any) => {
           console.log(`
-          Reply length: ${replies.length}. 
           Reply: ${replies}.`);
 
           res.json({success: true});
@@ -73,8 +69,6 @@ export function nameList(app: express.Application) {
       let RedisClient = redis.createClient(),
           request = req.body;
           // request = JSON.parse(req.body);
-
-      console.log(req);
 
       RedisClient.srem('name-list', request.name,
         (err:any, replies:any) => {

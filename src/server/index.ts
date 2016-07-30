@@ -1,4 +1,4 @@
-import * as http from "http";
+import * as http from 'http';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as path from 'path';
@@ -7,7 +7,7 @@ import * as routes from './routes';
 
 import { Init } from './db/redis';
 
-var _clientDir = "../client";
+var _clientDir = '../client';
 var app = express();
 
 export function init(port: number, mode: string) {
@@ -26,15 +26,15 @@ export function init(port: number, mode: string) {
    */
   if (mode == 'dev') {
     app.all('/*', function(req, res, next) {
-      res.header("Access-Control-Allow-Origin", "*");
-      res.header("Access-Control-Allow-Headers", "X-Requested-With");
+      res.header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Headers', 'X-Requested-With');
       next();
     });
 
     routes.init(app);
 
     let root = path.resolve(process.cwd());
-    let clientRoot = path.resolve(process.cwd(), './dist/dev/client')
+    let clientRoot = path.resolve(process.cwd(), './dist/dev/client');
     app.use(express.static(root));
     app.use(express.static(clientRoot));
 

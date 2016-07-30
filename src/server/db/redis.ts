@@ -1,11 +1,15 @@
-var redis = require("redis"),
-  client = redis.createClient();
+import * as redis from 'redis';
 
-client.sadd("names-list:name",
-  "Edsger Dijkstra",
-  "Donald Knuth",
-  "Alan Turing",
-  "Grace Hopper",
+export const RedisClient = redis.createClient();
+
+/**
+ * Init Names List.
+ */
+RedisClient.sadd("names-list:name",
+    "Edsger Dijkstra",
+    "Donald Knuth",
+    "Alan Turing",
+    "Grace Hopper",
   redis.print);
 
-client.quit();
+RedisClient.quit();

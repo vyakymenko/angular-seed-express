@@ -5,6 +5,8 @@ import * as path from 'path';
 import * as compression from 'compression';
 import * as routes from './routes';
 
+import { Init } from './db/redis';
+
 var _clientDir = "../client";
 var app = express();
 
@@ -12,6 +14,9 @@ export function init(port: number, mode: string) {
 
   app.use(bodyParser.json());
   app.use(compression());
+
+  // DB Init
+  Init();
 
   /**
    * Dev Mode.
@@ -30,7 +35,7 @@ export function init(port: number, mode: string) {
     let clientRoot = path.resolve(process.cwd(), './dist/dev/client')
     app.use(express.static(root));
     app.use(express.static(clientRoot));
-    
+
     var renderIndex = (req: express.Request, res: express.Response) => {
       res.sendFile(path.resolve(__dirname, _clientDir + '/index.html'));
     };

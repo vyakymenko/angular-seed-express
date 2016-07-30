@@ -24,7 +24,7 @@ export class NameListService {
    * @return {string[]} The Observable for the HTTP request.
    */
   get(): Observable<string[]> {
-    return this.http.get(`${Config.API}/api/name-list`)
+    return this.http.get(`${Config.API}/api/name-list/static`)
                     .map((res: Response) => res.json())
                     .catch(this.handleError);
   }

@@ -38,6 +38,12 @@ npm run build.dev
 # prod build
 npm run build.prod
 
+# run Redis
+$ src/redis-server
+# stop Redis
+$ src/redis-cli
+$ shutdown SAVE
+
 # run Express server (keep in touch, only after `npm run build.prod` )
 $ node app.server.prod.js
 # or
@@ -181,10 +187,10 @@ You can look in source file [here](https://github.com/vyakymenko/angular2-nginx-
 
 # Express Configuration
 
-`server/index.js`
+`src/server/index.js`
 
-```js
-var _proddir = '../dist/prod'; // Dist prod folder.
+```ts
+var _clientDir = '../client'; // Dist prod folder.
 ```
 
 `app.server.dev.js`
@@ -241,14 +247,13 @@ After installation we need to start our server:
 ```sh
 # start server
 $ src/redis-server
-
-# daemon server
-# will be in future
 ```
 
-# TODO:
+# Redis More Settings + Daemonize
 
- - Add daemon for Redis.
+ - Reids [Persistence](http://redis.io/topics/quickstart#redis-persistence)
+ - Redis [More Properties](http://redis.io/topics/quickstart#installing-redis-more-properly)
+ 
 
 # Contributors
 

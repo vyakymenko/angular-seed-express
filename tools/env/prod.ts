@@ -1,0 +1,5 @@
+export = {
+  ENV: 'PROD',
+  API: ''
+};
+

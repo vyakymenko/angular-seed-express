@@ -86,7 +86,7 @@
     "merge-stream": "^1.0.0",
     "open": "0.0.5",
     "postcss-reporter": "^1.4.1",
-    "protractor": "^3.3.0",
+    "protractor": "^4.0.3",
     "remap-istanbul": "^0.6.4",
     "rimraf": "^2.5.3",
     "run-sequence": "^1.2.2",

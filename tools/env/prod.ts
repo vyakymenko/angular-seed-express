@@ -1,4 +1,5 @@
 export = {
-  ENV: 'PROD'
+  ENV: 'PROD',
+  API: ''
 };
 

@@ -1,4 +1,5 @@
 export = {
-  ENV: 'DEV'
+  ENV: 'DEV',
+  API: 'http://localhost:9001'
 };
 

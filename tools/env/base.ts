@@ -1,5 +1,5 @@
 export = {
-  // Sample API url
-  API: 'https://demo.com'
+  ENV: 'BASE(DEV)',
+  API: 'http://localhost:9001'
 };
 

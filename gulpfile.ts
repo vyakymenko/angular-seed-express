@@ -75,9 +75,10 @@ gulp.task('build.test', (done: any) =>
 
 // --------------
 // Build test watch.
-gulp.task('build.test.watch', (done: any) =>
+gulp.task('test.watch', (done: any) =>
   runSequence('build.test',
               'watch.test',
+              'karma.watch',
               done));
 
 // --------------
@@ -123,7 +124,7 @@ gulp.task('serve.prod', (done: any) =>
 // Test.
 gulp.task('test', (done: any) =>
   runSequence('build.test',
-              'karma.start',
+              'karma.run',
               done));
 
 // --------------

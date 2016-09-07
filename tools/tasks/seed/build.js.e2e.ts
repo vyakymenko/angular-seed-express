@@ -3,8 +3,8 @@ import * as gulpLoadPlugins from 'gulp-load-plugins';
 import { join } from 'path';
 
 import {
-  APP_DEST,
-  APP_SRC,
+  APP_CLIENT_DEST,
+  APP_CLIENT_SRC,
   BOOTSTRAP_FACTORY_PROD_MODULE,
   SYSTEM_CONFIG_DEV,
   TOOLS_DIR
@@ -23,9 +23,9 @@ export = () => {
   let src = [
     'typings/index.d.ts',
     TOOLS_DIR + '/manual_typings/**/*.d.ts',
-    join(APP_SRC, '**/*.ts'),
-    '!' + join(APP_SRC, '**/*.spec.ts'),
-    '!' + join(APP_SRC, `**/${BOOTSTRAP_FACTORY_PROD_MODULE}.ts`)
+    join(APP_CLIENT_SRC, '**/*.ts'),
+    '!' + join(APP_CLIENT_SRC, '**/*.spec.ts'),
+    '!' + join(APP_CLIENT_SRC, `**/${BOOTSTRAP_FACTORY_PROD_MODULE}.ts`)
   ];
   let result = gulp.src(src)
     .pipe(plugins.plumber())
@@ -37,5 +37,5 @@ export = () => {
     .pipe(plugins.template(Object.assign(templateLocals(), {
       SYSTEM_CONFIG_DEV: jsonSystemConfig
     })))
-    .pipe(gulp.dest(APP_DEST));
+    .pipe(gulp.dest(APP_CLIENT_DEST));
 };

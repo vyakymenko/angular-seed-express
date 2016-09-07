@@ -5,9 +5,9 @@ import * as util from 'gulp-util';
 import { join/*, sep, relative*/ } from 'path';
 
 import {
-  APP_DEST,
+  APP_CLIENT_DEST,
   SYSTEM_CONFIG_DEV,
-  APP_SRC,
+  APP_CLIENT_SRC,
   BOOTSTRAP_FACTORY_PROD_MODULE,
   /*PROJECT_ROOT, */TOOLS_DIR,
   TYPED_COMPILE_INTERVAL
@@ -31,10 +31,10 @@ export = () => {
     TOOLS_DIR + '/manual_typings/**/*.d.ts'
   ]);
   let src = [
-    join(APP_SRC, '**/*.ts'),
-    '!' + join(APP_SRC, '**/*.spec.ts'),
-    '!' + join(APP_SRC, '**/*.e2e-spec.ts'),
-    '!' + join(APP_SRC, `**/${BOOTSTRAP_FACTORY_PROD_MODULE}.ts`)
+    join(APP_CLIENT_SRC, '**/*.ts'),
+    '!' + join(APP_CLIENT_SRC, '**/*.spec.ts'),
+    '!' + join(APP_CLIENT_SRC, '**/*.e2e-spec.ts'),
+    '!' + join(APP_CLIENT_SRC, `**/${BOOTSTRAP_FACTORY_PROD_MODULE}.ts`)
   ];
 
   let projectFiles = gulp.src(src);
@@ -80,5 +80,5 @@ export = () => {
         SYSTEM_CONFIG_DEV: jsonSystemConfig
       }
      )))
-    .pipe(gulp.dest(APP_DEST));
+    .pipe(gulp.dest(APP_CLIENT_DEST));
 };

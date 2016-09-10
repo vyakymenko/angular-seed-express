@@ -2,7 +2,7 @@ import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import { join} from 'path';
 
-import { APP_CLIENT_DEST, APP_CLIENT_SRC, TOOLS_DIR, ENABLE_SCSS } from '../../config';
+import { APP_CLIENT_DEST, APP_CLIENT_SRC, TOOLS_DIR } from '../../config';
 import { makeTsProject } from '../../utils';
 
 const plugins = <any>gulpLoadPlugins();
@@ -21,11 +21,6 @@ export = () => {
   let result = gulp.src(src)
     .pipe(plugins.plumber())
     .pipe(plugins.sourcemaps.init())
-    .pipe(plugins.inlineNg2Template({
-      base: APP_CLIENT_SRC,
-      useRelativePaths: true,
-      supportNonExistentFiles: ENABLE_SCSS
-    }))
     .pipe(plugins.typescript(tsProject));
 
   return result.js

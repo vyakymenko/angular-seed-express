@@ -9,6 +9,9 @@ import { APP_CLIENT_SRC, TMP_CLIENT_DIR } from '../../config';
 export = () => {
   return gulp.src([
       join(APP_CLIENT_SRC, '**/*.ts'),
+      join(APP_CLIENT_SRC, '**/*.html'),
+      join(APP_CLIENT_SRC, '**/*.css'),
+      join(APP_CLIENT_SRC, '**/*.json'),
       '!' + join(APP_CLIENT_SRC, '**/*.spec.ts'),
       '!' + join(APP_CLIENT_SRC, '**/*.e2e-spec.ts')
     ])

@@ -22,7 +22,7 @@ gulp.task('build.dev', (done: any) =>
               'build.index.dev',
               'build.server.dev',
               'copy.server.assets',
-              done));
+    done));
 
 // --------------
 // Build dev watch.
@@ -51,11 +51,33 @@ gulp.task('build.prod', (done: any) =>
               'css-lint',
               'build.assets.prod',
               'build.html_css',
-              'copy.client.js.prod',
+              'copy.prod',
               'copy.server.js.prod',
+              'build.server.prod',
               'build.js.prod',
               'build.bundles',
               'build.bundles.app',
+              'minify.bundles',
+              'build.index.prod',
+              'copy.server.assets',
+              done));
+
+// --------------
+// Build prod.
+gulp.task('build.prod.exp', (done: any) =>
+  runSequence('clean.prod',
+              'tslint',
+              'css-lint',
+              'build.assets.prod',
+              'build.html_css',
+              'copy.prod',
+              'copy.server.js.prod',
+              'build.server.prod',
+              'compile.ahead.prod',
+              'build.js.prod.exp',
+              'build.bundles',
+              'build.bundles.app.exp',
+              'minify.bundles',
               'build.index.prod',
               'build.server.prod',
               'copy.server.assets',
@@ -71,6 +93,8 @@ gulp.task('build.test', (done: any) =>
               'build.js.dev',
               'build.js.test',
               'build.index.dev',
+              'build.server.dev',
+              'copy.server.assets',
               done));
 
 // --------------
@@ -139,4 +163,4 @@ gulp.task('clean.once', (done: any) => {
     util.log('Skipping clean on rebuild');
     done();
   }
-})
+});

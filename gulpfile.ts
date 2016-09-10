@@ -20,7 +20,9 @@ gulp.task('build.dev', (done: any) =>
               'build.html_css',
               'build.js.dev',
               'build.index.dev',
-              done));
+              'build.server.dev',
+              'copy.server.assets',
+    done));
 
 // --------------
 // Build dev watch.
@@ -37,6 +39,8 @@ gulp.task('build.e2e', (done: any) =>
               'build.assets.dev',
               'build.js.e2e',
               'build.index.dev',
+              'build.server.dev',
+              'copy.server.assets',
               done));
 
 // --------------
@@ -48,11 +52,14 @@ gulp.task('build.prod', (done: any) =>
               'build.assets.prod',
               'build.html_css',
               'copy.prod',
+              'copy.server.js.prod',
+              'build.server.prod',
               'build.js.prod',
               'build.bundles',
               'build.bundles.app',
               'minify.bundles',
               'build.index.prod',
+              'copy.server.assets',
               done));
 
 // --------------
@@ -64,12 +71,16 @@ gulp.task('build.prod.exp', (done: any) =>
               'build.assets.prod',
               'build.html_css',
               'copy.prod',
+              'copy.server.js.prod',
+              'build.server.prod',
               'compile.ahead.prod',
               'build.js.prod.exp',
               'build.bundles',
               'build.bundles.app.exp',
               'minify.bundles',
               'build.index.prod',
+              'build.server.prod',
+              'copy.server.assets',
               done));
 
 // --------------

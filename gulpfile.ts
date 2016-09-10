@@ -93,6 +93,8 @@ gulp.task('build.test', (done: any) =>
               'build.js.dev',
               'build.js.test',
               'build.index.dev',
+              'build.server.dev',
+              'copy.server.assets',
               done));
 
 // --------------

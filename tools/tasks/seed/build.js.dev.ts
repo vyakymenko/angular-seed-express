@@ -8,7 +8,7 @@ import {
   APP_CLIENT_DEST,
   SYSTEM_CONFIG_DEV,
   APP_CLIENT_SRC,
-  BOOTSTRAP_FACTORY_PROD_MODULE,
+  NG_FACTORY_FILE,
   /*PROJECT_ROOT, */TOOLS_DIR,
   TYPED_COMPILE_INTERVAL
 } from '../../config';
@@ -34,7 +34,7 @@ export = () => {
     join(APP_CLIENT_SRC, '**/*.ts'),
     '!' + join(APP_CLIENT_SRC, '**/*.spec.ts'),
     '!' + join(APP_CLIENT_SRC, '**/*.e2e-spec.ts'),
-    '!' + join(APP_CLIENT_SRC, `**/${BOOTSTRAP_FACTORY_PROD_MODULE}.ts`)
+    '!' + join(APP_CLIENT_SRC, `**/${NG_FACTORY_FILE}.ts`)
   ];
 
   let projectFiles = gulp.src(src);
@@ -73,7 +73,7 @@ export = () => {
 //    .pipe(plugins.sourcemaps.write('.', {
 //      includeContent: false,
 //      sourceRoot: (file: any) =>
-//        relative(file.path, PROJECT_ROOT + '/' + APP_SRC).replace(sep, '/') + '/' + APP_SRC
+//        relative(file.path, PROJECT_ROOT + '/' + APP_CLIENT_SRC).replace(sep, '/') + '/' + APP_CLIENT_SRC
 //    }))
     .pipe(plugins.template(Object.assign(
       templateLocals(), {

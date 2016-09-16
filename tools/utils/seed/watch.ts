@@ -2,11 +2,7 @@ import * as gulpLoadPlugins from 'gulp-load-plugins';
 import { join } from 'path';
 import * as runSequence from 'run-sequence';
 
-import {
-  APP_CLIENT_SRC,
-  APP_SERVER_SRC,
-  TEMP_FILES
-} from '../../config';
+import Config from '../../config';
 import { notifyLiveReload } from '../../utils';
 
 const plugins = <any>gulpLoadPlugins();
@@ -18,9 +14,8 @@ const plugins = <any>gulpLoadPlugins();
 export function watch(taskname: string) {
   return function () {
     let paths:string[]=[
-      join(APP_CLIENT_SRC, '**'),
-      join(APP_SERVER_SRC, '**')
-    ].concat(TEMP_FILES.map((p) => { return '!'+p; }));
+      join(Config.APP_SRC,'**')
+    ].concat(Config.TEMP_FILES.map((p) => { return '!'+p; }));
 
     plugins.watch(paths, (e:any) =>
       runSequence(taskname, () => notifyLiveReload(e))

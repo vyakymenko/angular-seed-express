@@ -14,7 +14,8 @@ const plugins = <any>gulpLoadPlugins();
 export function watch(taskname: string) {
   return function () {
     let paths:string[]=[
-      join(Config.APP_SRC,'**')
+      join(Config.APP_CLIENT_SRC,'**'),
+      join(Config.APP_SERVER_SRC,'**')
     ].concat(Config.TEMP_FILES.map((p) => { return '!'+p; }));
 
     plugins.watch(paths, (e:any) =>

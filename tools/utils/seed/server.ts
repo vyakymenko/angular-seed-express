@@ -62,7 +62,7 @@ export function serveCoverage() {
  * Starts a new `express` server, serving the built files from `dist/prod`.
  */
 export function serveProd() {
-  let root = resolve(process.cwd(), Config.PROD_DEST);
+  let root = resolve(process.cwd(), Config.PROD_CLIENT_DEST);
   let server = express();
   let compression = require('compression');
       server.use(compression());

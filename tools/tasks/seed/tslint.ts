@@ -11,8 +11,8 @@ const plugins = <any>gulpLoadPlugins();
  */
 export = () => {
   let src = [
-    join(Config.APP_SRC, '**/*.ts'),
-    '!' + join(Config.APP_SRC, '**/*.d.ts'),
+    join(Config.APP_CLIENT_SRC, '**/*.ts'),
+    '!' + join(Config.APP_CLIENT_SRC, '**/*.d.ts'),
     join(Config.TOOLS_DIR, '**/*.ts'),
     '!' + join(Config.TOOLS_DIR, '**/*.d.ts')
   ];

@@ -21,13 +21,13 @@ var onlyDirs = function (es: any) {
  */
 export = () => {
   return gulp.src([
-    join(Config.APP_SRC, '**'),
-    '!' + join(Config.APP_SRC, '**', '*.ts'),
-    '!' + join(Config.APP_SRC, '**', '*.css'),
-    '!' + join(Config.APP_SRC, '**', '*.html'),
-    '!' + join(Config.APP_SRC, '**', '*.scss'),
+    join(Config.APP_CLIENT_SRC, '**'),
+    '!' + join(Config.APP_CLIENT_SRC, '**', '*.ts'),
+    '!' + join(Config.APP_CLIENT_SRC, '**', '*.css'),
+    '!' + join(Config.APP_CLIENT_SRC, '**', '*.html'),
+    '!' + join(Config.APP_CLIENT_SRC, '**', '*.scss'),
     '!' + join(Config.ASSETS_SRC, '**', '*.js')
   ].concat(Config.TEMP_FILES.map((p) => { return '!' + p; })))
     .pipe(onlyDirs(es))
-    .pipe(gulp.dest(Config.APP_DEST));
+    .pipe(gulp.dest(Config.APP_CLIENT_DEST));
 };

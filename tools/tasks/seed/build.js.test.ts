@@ -16,7 +16,7 @@ export = () => {
   let src = [
     'typings/index.d.ts',
     Config.TOOLS_DIR + '/manual_typings/**/*.d.ts',
-    join(Config.APP_SRC, '**/*.spec.ts')
+    join(Config.APP_CLIENT_SRC, '**/*.spec.ts')
   ];
   let result = gulp.src(src)
     .pipe(plugins.plumber())
@@ -25,6 +25,6 @@ export = () => {
 
   return result.js
     .pipe(plugins.sourcemaps.write())
-    .pipe(gulp.dest(Config.APP_DEST));
+    .pipe(gulp.dest(Config.APP_CLIENT_DEST));
 };
 

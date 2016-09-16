@@ -18,7 +18,7 @@ export function makeTsProject(options: Object = {}) {
       typescript: require('typescript')
     }, options);
     tsProjects[optionsHash] =
-      plugins.typescript.createProject(join(Config.APP_SRC, 'tsconfig.json'), config);
+      plugins.typescript.createProject(join(Config.APP_CLIENT_SRC, 'tsconfig.json'), config);
   }
   return tsProjects[optionsHash];
 }

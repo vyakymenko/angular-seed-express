@@ -10,11 +10,11 @@ export = () => {
     .gulpGenManifest({
       group: [{
         name: 'css',
-	sources: gulp.src(`${Config.APP_DEST}/**/*.css`)
+	sources: gulp.src(`${Config.APP_CLIENT_SRC}/**/*.css`)
       }, {
         name: 'js',
-	sources: gulp.src(`${Config.APP_DEST}/**/*.js`)
+	sources: gulp.src(`${Config.APP_CLIENT_DEST}/**/*.js`)
       }]
     })
-    .pipe(gulp.dest(Config.APP_DEST));
+    .pipe(gulp.dest(Config.APP_CLIENT_DEST));
 };

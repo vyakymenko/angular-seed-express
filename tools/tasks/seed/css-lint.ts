@@ -27,8 +27,8 @@ const processors = [
 
 function lintComponentStylesheets() {
   return gulp.src([
-    join(Config.APP_SRC, '**', `*.${stylesheetType}`),
-    `!${join(Config.APP_SRC, 'assets', '**', '*.scss')}`,
+    join(Config.APP_CLIENT_SRC, '**', `*.${stylesheetType}`),
+    `!${join(Config.APP_CLIENT_SRC, 'assets', '**', '*.scss')}`,
     `!${join(Config.CSS_SRC, '**', '*.css')}`
   ]).pipe(isProd ? plugins.cached('css-lint') : plugins.util.noop())
     .pipe(Config.ENABLE_SCSS ? plugins.sassLint() : plugins.postcss(processors))

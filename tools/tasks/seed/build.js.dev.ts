@@ -24,10 +24,10 @@ export = () => {
     Config.TOOLS_DIR + '/manual_typings/**/*.d.ts'
   ]);
   let src = [
-    join(Config.APP_SRC, '**/*.ts'),
-    '!' + join(Config.APP_SRC, '**/*.spec.ts'),
-    '!' + join(Config.APP_SRC, '**/*.e2e-spec.ts'),
-    '!' + join(Config.APP_SRC, `**/${Config.BOOTSTRAP_FACTORY_PROD_MODULE}.ts`)
+    join(Config.APP_CLIENT_SRC, '**/*.ts'),
+    '!' + join(Config.APP_CLIENT_SRC, '**/*.spec.ts'),
+    '!' + join(Config.APP_CLIENT_SRC, '**/*.e2e-spec.ts'),
+    '!' + join(Config.APP_CLIENT_SRC, `**/${Config.BOOTSTRAP_FACTORY_PROD_MODULE}.ts`)
   ];
 
   let projectFiles = gulp.src(src);
@@ -66,12 +66,12 @@ export = () => {
 //    .pipe(plugins.sourcemaps.write('.', {
 //      includeContent: false,
 //      sourceRoot: (file: any) =>
-//        relative(file.path, PROJECT_ROOT + '/' + APP_SRC).replace(sep, '/') + '/' + APP_SRC
+//        relative(file.path, PROJECT_ROOT + '/' + APP_CLIENT_SRC).replace(sep, '/') + '/' + APP_CLIENT_SRC
 //    }))
     .pipe(plugins.template(Object.assign(
       templateLocals(), {
         SYSTEM_CONFIG_DEV: jsonSystemConfig
       }
      )))
-    .pipe(gulp.dest(Config.APP_DEST));
+    .pipe(gulp.dest(Config.APP_CLIENT_DEST));
 };

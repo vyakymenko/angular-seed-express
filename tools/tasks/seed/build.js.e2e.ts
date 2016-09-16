@@ -17,9 +17,9 @@ export = () => {
   let src = [
     'typings/index.d.ts',
     Config.TOOLS_DIR + '/manual_typings/**/*.d.ts',
-    join(Config.APP_SRC, '**/*.ts'),
-    '!' + join(Config.APP_SRC, '**/*.spec.ts'),
-    '!' + join(Config.APP_SRC, `**/${Config.BOOTSTRAP_FACTORY_PROD_MODULE}.ts`)
+    join(Config.APP_CLIENT_SRC, '**/*.ts'),
+    '!' + join(Config.APP_CLIENT_SRC, '**/*.spec.ts'),
+    '!' + join(Config.APP_CLIENT_SRC, `**/${Config.BOOTSTRAP_FACTORY_PROD_MODULE}.ts`)
   ];
   let result = gulp.src(src)
     .pipe(plugins.plumber())
@@ -31,5 +31,5 @@ export = () => {
     .pipe(plugins.template(Object.assign(templateLocals(), {
       SYSTEM_CONFIG_DEV: jsonSystemConfig
     })))
-    .pipe(gulp.dest(Config.APP_DEST));
+    .pipe(gulp.dest(Config.APP_CLIENT_DEST));
 };

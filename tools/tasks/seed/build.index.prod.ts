@@ -3,16 +3,7 @@ import * as gulpLoadPlugins from 'gulp-load-plugins';
 import { join, sep, normalize } from 'path';
 import * as slash from 'slash';
 
-import {
-  APP_BASE,
-  APP_CLIENT_DEST,
-  APP_CLIENT_SRC,
-  CSS_DEST,
-  CSS_PROD_BUNDLE,
-  JS_DEST,
-  JS_PROD_APP_BUNDLE,
-  JS_PROD_SHIMS_BUNDLE
-} from '../../config';
+import Config from '../../config';
 import { templateLocals } from '../../utils';
 
 const plugins = <any>gulpLoadPlugins();
@@ -22,11 +13,11 @@ const plugins = <any>gulpLoadPlugins();
  * environment.
  */
 export = () => {
-  return gulp.src(join(APP_CLIENT_SRC, 'index.html'))
+  return gulp.src(join(Config.APP_CLIENT_SRC, 'index.html'))
     .pipe(injectJs())
     .pipe(injectCss())
     .pipe(plugins.template(templateLocals()))
-    .pipe(gulp.dest(APP_CLIENT_DEST));
+    .pipe(gulp.dest(Config.APP_CLIENT_DEST));
 };
 
 /**
@@ -44,14 +35,14 @@ function inject(...files: Array<string>) {
  * Injects the bundled JavaScript shims and application bundles for the production environment.
  */
 function injectJs() {
-  return inject(join(JS_DEST, JS_PROD_SHIMS_BUNDLE), join(JS_DEST, JS_PROD_APP_BUNDLE));
+  return inject(join(Config.JS_DEST, Config.JS_PROD_SHIMS_BUNDLE), join(Config.JS_DEST, Config.JS_PROD_APP_BUNDLE));
 }
 
 /**
  * Injects the bundled CSS files for the production environment.
  */
 function injectCss() {
-  return inject(join(CSS_DEST, CSS_PROD_BUNDLE));
+  return inject(join(Config.CSS_DEST, Config.CSS_PROD_BUNDLE));
 }
 
 /**
@@ -61,7 +52,7 @@ function injectCss() {
 function transformPath() {
   return function(filepath: string) {
     let path: Array<string> = normalize(filepath).split(sep);
-    arguments[0] = APP_BASE + path.slice(4, path.length).join(sep) + `?${Date.now()}`;
+    arguments[0] = Config.APP_BASE + path.slice(4, path.length).join(sep) + `?${Date.now()}`;
     return slash(plugins.inject.transform.apply(plugins.inject.transform, arguments));
   };
 }

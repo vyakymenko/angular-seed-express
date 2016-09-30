@@ -73,6 +73,22 @@ export class SeedConfig {
   COVERAGE_DIR = 'coverage';
 
   /**
+   * Karma reporter configuration
+   */
+  KARMA_REPORTERS: any = {
+    preprocessors: {
+      'dist/**/!(*spec).js': ['coverage']
+    },
+    reporters: ['mocha', 'coverage'],
+    coverageReporter: {
+      dir: this.COVERAGE_DIR + '/',
+      reporters: [
+        {type: 'json', subdir: '.', file: 'coverage-final.json'}
+      ]
+    }
+  };
+
+  /**
    * The path for the base of the application at runtime.
    * The default path is based on the environment '/',
    * which can be overriden by the `--base` flag when running `npm start`.
@@ -278,7 +294,8 @@ export class SeedConfig {
     { src: 'zone.js/dist/zone.js', inject: 'libs' },
     { src: 'core-js/client/shim.min.js', inject: 'shims' },
     { src: 'systemjs/dist/system.src.js', inject: 'shims', env: ENVIRONMENTS.DEVELOPMENT },
-    { src: 'rxjs/bundles/Rx.min.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT },
+    // Temporary fix. See https://github.com/angular/angular/issues/9359
+    { src: '.tmp/Rx.min.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT },
   ];
 
   /**
@@ -339,14 +356,12 @@ export class SeedConfig {
         'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
       '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
 
-      'rxjs/*': 'node_modules/rxjs/*',
       'app/*': '/app/*',
       // For test config
       'dist/dev/*': '/base/dist/dev/*',
       '*': 'node_modules/*'
     },
     packages: {
-      rxjs: { defaultExtension: 'js' }
     }
   };
 
@@ -370,6 +385,7 @@ export class SeedConfig {
     ],
     paths: {
       [join(this.TMP_DIR, 'app', '*')]: `${this.TMP_DIR}/app/*`,
+      'node_modules/*': 'node_modules/*',
       '*': 'node_modules/*'
     },
     packages: {

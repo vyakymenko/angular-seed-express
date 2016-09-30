@@ -1,4 +1,5 @@
 import { join } from 'path';
+import * as slash from 'slash';
 import { argv } from 'yargs';
 
 import { Environments, InjectableDependency } from './seed.config.interfaces';
@@ -66,10 +67,28 @@ export class SeedConfig {
   COVERAGE_PORT = argv['coverage-port'] || 4004;
 
   /**
-  * The path to the coverage output
-  * NB: this must match what is configured in ./karma.conf.js
-  */
+   * The path to the coverage output
+   * NB: this must match what is configured in ./karma.conf.js
+   */
   COVERAGE_DIR = 'coverage';
+
+  /**
+   * Karma reporter configuration
+   * The path to the coverage output
+   * NB: this must match what is configured in ./karma.conf.js
+   */
+  KARMA_REPORTERS: any = {
+    preprocessors: {
+      'dist/**/!(*spec).js': ['coverage']
+    },
+    reporters: ['mocha', 'coverage'],
+    coverageReporter: {
+      dir: this.COVERAGE_DIR + '/',
+      reporters: [
+        {type: 'json', subdir: '.', file: 'coverage-final.json'}
+      ]
+    }
+  };
 
   /**
    * The path for the base of the application at runtime.
@@ -83,7 +102,7 @@ export class SeedConfig {
    * The base path of node modules.
    * @type {string}
    */
-  NPM_BASE = join(this.APP_BASE, 'node_modules/');
+  NPM_BASE = slash(join(this.APP_BASE, 'node_modules/'));
 
   /**
    * The flag for the hot-loader option of the application.
@@ -314,7 +333,8 @@ export class SeedConfig {
     { src: 'zone.js/dist/zone.js', inject: 'libs' },
     { src: 'core-js/client/shim.min.js', inject: 'shims' },
     { src: 'systemjs/dist/system.src.js', inject: 'shims', env: ENVIRONMENTS.DEVELOPMENT },
-    { src: 'rxjs/bundles/Rx.min.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT },
+    // Temporary fix. See https://github.com/angular/angular/issues/9359
+    { src: '.tmp/Rx.min.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT },
   ];
 
   /**
@@ -364,24 +384,23 @@ export class SeedConfig {
       '@angular/platform-browser': 'node_modules/@angular/platform-browser/bundles/platform-browser.umd.js',
       '@angular/platform-browser-dynamic': 'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
       '@angular/router': 'node_modules/@angular/router/bundles/router.umd.js',
+
       '@angular/common/testing': 'node_modules/@angular/common/bundles/common-testing.umd.js',
       '@angular/compiler/testing': 'node_modules/@angular/compiler/bundles/compiler-testing.umd.js',
       '@angular/core/testing': 'node_modules/@angular/core/bundles/core-testing.umd.js',
       '@angular/http/testing': 'node_modules/@angular/http/bundles/http-testing.umd.js',
       '@angular/platform-browser/testing':
-      'node_modules/@angular/platform-browser/bundles/platform-browser-testing.umd.js',
+        'node_modules/@angular/platform-browser/bundles/platform-browser-testing.umd.js',
       '@angular/platform-browser-dynamic/testing':
-      'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
+        'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
       '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
 
-      'rxjs/*': 'node_modules/rxjs/*',
       'app/*': '/app/*',
       // For test config
       'dist/dev/*': '/base/dist/dev/*',
       '*': 'node_modules/*'
     },
     packages: {
-      rxjs: { defaultExtension: 'js' }
     }
   };
 
@@ -398,12 +417,14 @@ export class SeedConfig {
    */
   SYSTEM_BUILDER_CONFIG: any = {
     defaultJSExtensions: true,
+    base: this.PROJECT_ROOT,
     packageConfigPaths: [
-      join(this.PROJECT_ROOT, 'node_modules', '*', 'package.json'),
-      join(this.PROJECT_ROOT, 'node_modules', '@angular', '*', 'package.json')
+      join('node_modules', '*', 'package.json'),
+      join('node_modules', '@angular', '*', 'package.json')
     ],
     paths: {
-      [`${this.TMP_CLIENT_DIR}/*`]: `${this.TMP_CLIENT_DIR}/*`,
+      [join(this.TMP_CLIENT_DIR, 'app', '*')]: `${this.TMP_CLIENT_DIR}/app/*`,
+      'node_modules/*': 'node_modules/*',
       '*': 'node_modules/*'
     },
     packages: {
@@ -444,6 +465,7 @@ export class SeedConfig {
         defaultExtension: 'js'
       },
       'rxjs': {
+        main: 'Rx.js',
         defaultExtension: 'js'
       }
     }
@@ -486,26 +508,7 @@ export class SeedConfig {
      */
     'browser-sync': {
       middleware: [require('connect-history-api-fallback')({
-        index: `${this.APP_BASE}index.html`,
-//        rewrites: [
-//          {
-//            from: /^\/node_modules\/.*$/,
-//            to: (context:any) => context.parsedUrl.pathname
-//          },
-//          {
-//            from: new RegExp(`^${this.APP_BASE}${this.APP_SRC}$`),
-//            to: (context:any) => context.parsedUrl.pathname
-//          },
-//          {
-//            from: /^\/assets\/.*$/,
-//            to: (context:any) => context.parsedUrl.pathname
-//          },
-//          {
-//            from: /^\/css\/.*$/,
-//            to: (context:any) => context.parsedUrl.pathname
-//          }
-//        ],
-//        disableDotRule: true
+        index: `${this.APP_BASE}index.html`
       })],
       port: this.PORT,
       startPath: this.APP_BASE,
@@ -514,6 +517,7 @@ export class SeedConfig {
       server: {
         baseDir: `${this.DIST_DIR}/empty/`,
         routes: {
+          [`${this.APP_BASE}${this.APP_CLIENT_SRC}`]: this.APP_CLIENT_SRC,
           [`${this.APP_BASE}${this.APP_CLIENT_DEST}`]: this.APP_CLIENT_DEST,
           [`${this.APP_BASE}node_modules`]: 'node_modules',
           [`${this.APP_BASE.replace(/\/$/, '')}`]: this.APP_CLIENT_DEST

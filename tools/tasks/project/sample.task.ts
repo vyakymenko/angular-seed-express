@@ -8,6 +8,6 @@ import Config from '../../config';
  * current application environment.
  */
 export = () => {
-  return gulp.src(join(Config.APP_SRC, '**/*.ts'))
-    .pipe(gulp.dest(Config.APP_DEST));
+  return gulp.src(join(Config.APP_CLIENT_SRC, '**/*.ts'))
+    .pipe(gulp.dest(Config.APP_CLIENT_DEST));
 };

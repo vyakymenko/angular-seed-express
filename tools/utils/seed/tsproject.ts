@@ -11,7 +11,7 @@ let tsProjects: any = {};
  * Creates a TypeScript project with the given options using the gulp typescript plugin.
  * @param {Object} options - The additional options for the project configuration.
  */
-export function makeTsProject(options: Object = {}, pathToTsConfig: string = Config.APP_SRC) {
+export function makeTsProject(options: Object = {}, pathToTsConfig: string = Config.APP_CLIENT_SRC) {
   let optionsHash = JSON.stringify(options);
   if (!tsProjects[optionsHash]) {
     let config = Object.assign({

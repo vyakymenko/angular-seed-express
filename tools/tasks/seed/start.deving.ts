@@ -12,7 +12,7 @@ import { notifyLiveReload } from '../../utils';
 function watchAppFiles(path: string, fileChangeCallback: (e: any, done: () => void) => void) {
 
   let paths: string[] = [
-    join(Config.APP_SRC, path)
+    join(Config.APP_CLIENT_SRC, path)
   ].concat(Config.TEMP_FILES.map((p) => { return '!' + p; }));
 
   let busyWithCall : boolean = false;

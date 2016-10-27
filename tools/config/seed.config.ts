@@ -2,7 +2,23 @@ import { join } from 'path';
 import * as slash from 'slash';
 import { argv } from 'yargs';
 
-import { Environments, InjectableDependency } from './seed.config.interfaces';
+import { Environments, ExtendPackages, InjectableDependency } from './seed.config.interfaces';
+
+/************************* DO NOT CHANGE ************************
+ *
+ * DO NOT make any changes in this file because it will
+ * make your migration to newer versions of the seed harder.
+ *
+ * Your application-specific configurations should be
+ * in project.config.ts. If you need to change any tasks
+ * from "./tasks" overwrite them by creating a task with the
+ * same name in "./projects". For further information take a
+ * look at the documentation:
+ *
+ * 1) https://github.com/mgechev/angular2-seed/tree/master/tools
+ * 2) https://github.com/mgechev/angular2-seed/wiki
+ *
+ *****************************************************************/
 
 /**
  * The enumeration of available environments.
@@ -67,15 +83,13 @@ export class SeedConfig {
   COVERAGE_PORT = argv['coverage-port'] || 4004;
 
   /**
-   * The path to the coverage output
-   * NB: this must match what is configured in ./karma.conf.js
-   */
+  * The path to the coverage output
+  * NB: this must match what is configured in ./karma.conf.js
+  */
   COVERAGE_DIR = 'coverage';
 
   /**
    * Karma reporter configuration
-   * The path to the coverage output
-   * NB: this must match what is configured in ./karma.conf.js
    */
   KARMA_REPORTERS: any = {
     preprocessors: {
@@ -179,6 +193,7 @@ export class SeedConfig {
 
   /**
    * The base folder of the server source files.
+   * The base folder of the applications source files.
    * @type {string}
    */
   APP_SERVER_SRC = `src/${this.APP_SERVER}`;
@@ -249,19 +264,19 @@ export class SeedConfig {
   TMP_CLIENT_DIR = `${this.DIST_DIR}/tmp_${this.APP_CLIENT}`;
 
   /**
-   * The folder for server temporary files.
+   * The folder for the built files in the `prod` environment.
    * @type {string}
    */
   TMP_SERVER_DIR = `${this.DIST_DIR}/tmp_${this.APP_SERVER}`;
 
   /**
-   * The folder for the built client files, corresponding to the current environment.
+   * The folder for temporary files.
    * @type {string}
    */
   APP_CLIENT_DEST = this.ENV === ENVIRONMENTS.DEVELOPMENT ? this.DEV_CLIENT_DEST : this.PROD_CLIENT_DEST;
 
   /**
-   * The folder for the built server files, corresponding to the current environment.
+   * The folder for the built files, corresponding to the current environment.
    * @type {string}
    */
   APP_SERVER_DEST = this.ENV === ENVIRONMENTS.DEVELOPMENT ? this.DEV_SERVER_DEST : this.PROD_SERVER_DEST;
@@ -314,11 +329,6 @@ export class SeedConfig {
   VERSION_NODE = '4.0.0';
 
   /**
-   * The ruleset to be used by `codelyzer` for linting the TypeScript files.
-   */
-  CODELYZER_RULES = customRules();
-
-  /**
    * The flag to enable handling of SCSS files
    * The default value is false. Override with the '--scss' flag.
    * @type {boolean}
@@ -369,11 +379,6 @@ export class SeedConfig {
    */
   SYSTEM_CONFIG_DEV: any = {
     defaultJSExtensions: true,
-    packageConfigPaths: [
-      `/node_modules/*/package.json`,
-      `/node_modules/**/package.json`,
-      `/node_modules/@angular/*/package.json`
-    ],
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
       '@angular/common': 'node_modules/@angular/common/bundles/common.umd.js',
@@ -423,7 +428,10 @@ export class SeedConfig {
       join('node_modules', '@angular', '*', 'package.json')
     ],
     paths: {
-      [join(this.TMP_CLIENT_DIR, 'app', '*')]: `${this.TMP_CLIENT_DIR}/app/*`,
+      // Note that for multiple apps this configuration need to be updated
+      // You will have to include entries for each individual application in
+      // `src/client`.
+      [join(this.TMP_CLIENT_DIR, this.BOOTSTRAP_DIR, '*')]: `${this.TMP_CLIENT_DIR}/${this.BOOTSTRAP_DIR}/*`,
       'node_modules/*': 'node_modules/*',
       '*': 'node_modules/*'
     },
@@ -575,6 +583,17 @@ export class SeedConfig {
     return this.ENV === ENVIRONMENTS.PRODUCTION && this.ENABLE_SCSS ? 'scss' : 'css';
   }
 
+  addPackageBundles(pack: ExtendPackages) {
+
+    if (pack.path) {
+      this.SYSTEM_CONFIG_DEV.paths[pack.name] = pack.path;
+    }
+
+    if (pack.packageMeta) {
+      this.SYSTEM_BUILDER_CONFIG.packages[pack.name] = pack.packageMeta;
+    }
+  }
+
 }
 
 /**
@@ -611,15 +630,6 @@ function filterDependency(env: string, d: InjectableDependency): boolean {
 function appVersion(): number | string {
   var pkg = require('../../package.json');
   return pkg.version;
-}
-
-/**
- * Returns the linting configuration to be used for `codelyzer`.
- * @return {string[]} The list of linting rules.
- */
-function customRules(): string[] {
-  var lintConf = require('../../tslint.json');
-  return lintConf.rulesDirectory;
 }
 
 /**

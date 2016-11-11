@@ -21,7 +21,7 @@ const modifyFile = (path: string, mod: any = (f: string) => f) => {
 
 export = (done: any) => {
   // Note: dirty hack until we're able to set config easier
-  modifyFile(join(Config.TMP_DIR, 'tsconfig.json'), (content: string) => {
+  modifyFile(join(Config.TMP_CLIENT_DIR, 'tsconfig.json'), (content: string) => {
     const parsed = JSON.parse(content);
     parsed.files = parsed.files || [];
     parsed.files.push(join(Config.BOOTSTRAP_DIR, 'main.ts'));
@@ -37,7 +37,7 @@ export = (done: any) => {
   }
 
   const cliOptions = new tsc.NgcCliOptions(args);
-  tsc.main(Config.TMP_DIR, cliOptions, codegen)
+  tsc.main(Config.TMP_CLIENT_DIR, cliOptions, codegen)
     .then(done)
     .catch(e => {
       console.error(e.stack);

@@ -9,10 +9,7 @@ import Config from '../../config';
 export = () => {
   return gulp.src([
       join(Config.APP_CLIENT_SRC, '**/*.ts'),
-      join(Config.APP_CLIENT_SRC, '**/*.html'),
-      join(Config.APP_CLIENT_SRC, '**/*.css'),
       join(Config.APP_CLIENT_SRC, '**/*.json'),
-      join(Config.APP_CLIENT_SRC, '*.json'),
       '!' + join(Config.APP_CLIENT_SRC, '**/*.spec.ts'),
       '!' + join(Config.APP_CLIENT_SRC, '**/*.e2e-spec.ts')
     ])

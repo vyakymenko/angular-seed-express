@@ -9,6 +9,7 @@ const plugins = <any>gulpLoadPlugins();
 
 const INLINE_OPTIONS = {
   base: Config.TMP_CLIENT_DIR,
+  target: 'es5',
   useRelativePaths: true,
   removeLineBreaks: true
 };

@@ -424,7 +424,7 @@ export class SeedConfig {
       // You will have to include entries for each individual application in
       // `src/client`.
       [join(this.TMP_CLIENT_DIR, this.BOOTSTRAP_DIR, '*')]: `${this.TMP_CLIENT_DIR}/${this.BOOTSTRAP_DIR}/*`,
-      'dist/tmp/node_modules/*': 'dist/tmp/node_modules/*',
+      'dist/tmp_client/node_modules/*': 'dist/tmp_client/node_modules/*',
       'node_modules/*': 'node_modules/*',
       '*': 'node_modules/*'
     },

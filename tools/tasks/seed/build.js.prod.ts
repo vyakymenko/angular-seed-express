@@ -3,12 +3,12 @@ import * as gulpLoadPlugins from 'gulp-load-plugins';
 import { join } from 'path';
 
 import Config from '../../config';
-import { makeTsProject, templateLocals } from '../../utils';
+import { makeTsProject, TemplateLocalsBuilder } from '../../utils';
 
 const plugins = <any>gulpLoadPlugins();
 
 const INLINE_OPTIONS = {
-  base: Config.TMP_CLIENT_DIR,
+  base: Config.TMP_DIR,
   target: 'es5',
   useRelativePaths: true,
   removeLineBreaks: true
@@ -19,11 +19,11 @@ const INLINE_OPTIONS = {
  */
 
 export = () => {
-  let tsProject = makeTsProject({}, Config.TMP_CLIENT_DIR);
+  let tsProject = makeTsProject({}, Config.TMP_DIR);
   let src = [
     Config.TOOLS_DIR + '/manual_typings/**/*.d.ts',
-    join(Config.TMP_CLIENT_DIR, '**/*.ts'),
-    '!' + join(Config.TMP_CLIENT_DIR, `**/${Config.NG_FACTORY_FILE}.ts`)
+    join(Config.TMP_DIR, '**/*.ts'),
+    '!' + join(Config.TMP_DIR, `**/${Config.NG_FACTORY_FILE}.ts`)
   ];
   let result = gulp.src(src)
     .pipe(plugins.plumber())
@@ -35,8 +35,8 @@ export = () => {
 
 
   return result.js
-    .pipe(plugins.template(templateLocals()))
-    .pipe(gulp.dest(Config.TMP_CLIENT_DIR))
+    .pipe(plugins.template(new TemplateLocalsBuilder().build()))
+    .pipe(gulp.dest(Config.TMP_DIR))
     .on('error', (e: any) => {
       console.log(e);
     });

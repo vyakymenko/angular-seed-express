@@ -2,7 +2,7 @@ const config = {
   baseUrl: 'http://localhost:9001/',
 
   specs: [
-    './dist/dev/**/*.e2e-spec.js'
+    './dist/e2e/**/*.e2e-spec.js'
   ],
 
   exclude: [],

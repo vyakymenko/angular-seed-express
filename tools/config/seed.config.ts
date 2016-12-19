@@ -101,21 +101,7 @@ export class SeedConfig {
    * The base path of node modules.
    * @type {string}
    */
-  NPM_BASE = slash(join(this.APP_BASE, 'node_modules/'));
-
-  /**
-   * The flag for the hot-loader option of the application.
-   * Per default the option is not set, but can be set by the `--hot-loader` flag when running `npm start`.
-   * @type {boolean}
-   */
-  ENABLE_HOT_LOADING = argv['hot-loader'];
-
-  /**
-   * The port where the application will run, if the `hot-loader` option mode is used.
-   * The default hot-loader port is `5578`.
-   * @type {number}
-   */
-  HOT_LOADER_PORT = 5578;
+  NPM_BASE = slash(join('.', this.APP_BASE, 'node_modules/'));
 
   /**
    * The build interval which will force the TypeScript compiler to perform a typed compile run.
@@ -143,20 +129,10 @@ export class SeedConfig {
   APP_CLIENT = argv['client'] || 'client';
 
   /**
-   * The directory where the server files are located.
-   * The default directory is `server`.
+   * The bootstrap file to be used to boot the application.
    * @type {string}
    */
-  APP_SERVER = argv['server'] || 'server';
-
-  /**
-   * The bootstrap file to be used to boot the application. The file to be used is dependent if the hot-loader option is
-   * used or not.
-   * Per default (non hot-loader mode) the `main.ts` file will be used, with the hot-loader option enabled, the
-   * `hot_loader_main.ts` file will be used.
-   * @type {string}
-   */
-  BOOTSTRAP_MODULE = `${this.BOOTSTRAP_DIR}/` + (this.ENABLE_HOT_LOADING ? 'hot_loader_main' : 'main');
+  BOOTSTRAP_MODULE = `${this.BOOTSTRAP_DIR}/main`;
 
   BOOTSTRAP_PROD_MODULE = `${this.BOOTSTRAP_DIR}/` + 'main';
 
@@ -171,34 +147,39 @@ export class SeedConfig {
   APP_TITLE = 'Welcome to angular2-seed!';
 
   /**
-   * The base folder of the client source files.
+   * The base folder of the applications source files.
    * @type {string}
    */
-  APP_CLIENT_SRC = `src/${this.APP_CLIENT}`;
+  APP_SRC = `src/${this.APP_CLIENT}`;
 
   /**
-   * The base folder of the server source files.
+   * The name of the TypeScript project file
    * @type {string}
    */
-  APP_SERVER_SRC = `src/${this.APP_SERVER}`;
+  APP_PROJECTNAME = 'tsconfig.json';
 
   /**
    * The folder of the applications asset files.
    * @type {string}
    */
-  ASSETS_SRC = `${this.APP_CLIENT_SRC}/assets`;
+  ASSETS_SRC = `${this.APP_SRC}/assets`;
 
   /**
    * The folder of the applications css files.
    * @type {string}
    */
-  CSS_SRC = `${this.APP_CLIENT_SRC}/css`;
+  CSS_SRC = `${this.APP_SRC}/css`;
+
+  /**
+   * The folder of the e2e specs and framework
+   */
+  E2E_SRC = 'src/e2e';
 
   /**
    * The folder of the applications scss files.
    * @type {string}
    */
-  SCSS_SRC = `${this.APP_CLIENT_SRC}/scss`;
+  SCSS_SRC = `${this.APP_SRC}/scss`;
 
   /**
    * The directory of the applications tools
@@ -210,6 +191,18 @@ export class SeedConfig {
    * The directory of the tasks provided by the seed.
    */
   SEED_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'seed');
+
+  /**
+   * Seed tasks which are composition of other tasks.
+   */
+  SEED_COMPOSITE_TASKS = join(process.cwd(), this.TOOLS_DIR, 'config', 'seed.tasks.json');
+
+  /**
+   * Project tasks which are composition of other tasks
+   * and aim to override the tasks defined in
+   * SEED_COMPOSITE_TASKS.
+   */
+  PROJECT_COMPOSITE_TASKS = join(process.cwd(), this.TOOLS_DIR, 'config', 'project.tasks.json');
 
   /**
    * The destination folder for the generated documentation.
@@ -224,65 +217,46 @@ export class SeedConfig {
   DIST_DIR = 'dist';
 
   /**
-   * The folder for built client files in the `dev` environment.
+   * The folder for built files in the `dev` environment.
    * @type {string}
    */
-  DEV_CLIENT_DEST = `${this.DIST_DIR}/dev/${this.APP_CLIENT}`;
+  DEV_DEST = `${this.DIST_DIR}/dev`;
 
   /**
-   * The folder for the built client files in the `prod` environment.
+   * The folder for the built files in the `prod` environment.
    * @type {string}
    */
-  PROD_CLIENT_DEST = `${this.DIST_DIR}/prod/${this.APP_CLIENT}`;
+  PROD_DEST = `${this.DIST_DIR}/prod`;
 
   /**
-   * The folder for built server files in the `dev` environment.
+   * The folder for the built files of the e2e-specs.
    * @type {string}
    */
-  DEV_SERVER_DEST = `${this.DIST_DIR}/dev/${this.APP_SERVER}`;
+  E2E_DEST = `${this.DIST_DIR}/e2e`;
 
   /**
-   * The folder for the built server files in the `prod` environment.
+   * The folder for temporary files.
    * @type {string}
    */
-  PROD_SERVER_DEST = `${this.DIST_DIR}/prod/${this.APP_SERVER}`;
+  TMP_DIR = `${this.DIST_DIR}/tmp`;
 
   /**
-   * The folder for client temporary files.
+   * The folder for the built files, corresponding to the current environment.
    * @type {string}
    */
-  TMP_CLIENT_DIR = `${this.DIST_DIR}/tmp_${this.APP_CLIENT}`;
-
-  /**
-   * The folder for server temporary files.
-   * @type {string}
-   */
-  TMP_SERVER_DIR = `${this.DIST_DIR}/tmp_${this.APP_SERVER}`;
-
-  /**
-   * The folder for the built client files, corresponding to the current environment.
-   * @type {string}
-   */
-  APP_CLIENT_DEST = this.BUILD_TYPE === BUILD_TYPES.DEVELOPMENT ? this.DEV_CLIENT_DEST : this.PROD_CLIENT_DEST;
-
-  /**
-   * The folder for the built server files, corresponding to the current environment.
-   * @type {string}
-   */
-  APP_SERVER_DEST = this.BUILD_TYPE === BUILD_TYPES.DEVELOPMENT ? this.DEV_SERVER_DEST : this.PROD_SERVER_DEST;
-
+  APP_DEST = this.BUILD_TYPE === BUILD_TYPES.DEVELOPMENT ? this.DEV_DEST : this.PROD_DEST;
 
   /**
    * The folder for the built CSS files.
    * @type {strings}
    */
-  CSS_DEST = `${this.APP_CLIENT_DEST}/css`;
+  CSS_DEST = `${this.APP_DEST}/css`;
 
   /**
    * The folder for the built JavaScript files.
    * @type {string}
    */
-  JS_DEST = `${this.APP_CLIENT_DEST}/js`;
+  JS_DEST = `${this.APP_DEST}/js`;
 
   /**
    * The version of the application as defined in the `package.json`.
@@ -423,8 +397,8 @@ export class SeedConfig {
       // Note that for multiple apps this configuration need to be updated
       // You will have to include entries for each individual application in
       // `src/client`.
-      [join(this.TMP_CLIENT_DIR, this.BOOTSTRAP_DIR, '*')]: `${this.TMP_CLIENT_DIR}/${this.BOOTSTRAP_DIR}/*`,
-      'dist/tmp_client/node_modules/*': 'dist/tmp_client/node_modules/*',
+      [join(this.TMP_DIR, this.BOOTSTRAP_DIR, '*')]: `${this.TMP_DIR}/${this.BOOTSTRAP_DIR}/*`,
+      'dist/tmp/node_modules/*': 'dist/tmp/node_modules/*',
       'node_modules/*': 'node_modules/*',
       '*': 'node_modules/*'
     },
@@ -518,10 +492,10 @@ export class SeedConfig {
       server: {
         baseDir: `${this.DIST_DIR}/empty/`,
         routes: {
-          [`${this.APP_BASE}${this.APP_CLIENT_SRC}`]: this.APP_CLIENT_SRC,
-          [`${this.APP_BASE}${this.APP_CLIENT_DEST}`]: this.APP_CLIENT_DEST,
+          [`${this.APP_BASE}${this.APP_SRC}`]: this.APP_SRC,
+          [`${this.APP_BASE}${this.APP_DEST}`]: this.APP_DEST,
           [`${this.APP_BASE}node_modules`]: 'node_modules',
-          [`${this.APP_BASE.replace(/\/$/, '')}`]: this.APP_CLIENT_DEST
+          [`${this.APP_BASE.replace(/\/$/, '')}`]: this.APP_DEST
         }
       }
     },
@@ -550,6 +524,28 @@ export class SeedConfig {
       }
     }
   };
+
+  constructor() {
+    for (let proxy of this.getProxyMiddleware()) {
+      this.PLUGIN_CONFIGS['browser-sync'].middleware.push(proxy);
+    }
+  }
+
+  /**
+   * Get proxy middleware configuration. Add in your project config like:
+   * getProxyMiddleware(): Array<any> {
+   *   const proxyMiddleware = require('http-proxy-middleware');
+   *   return [
+   *     proxyMiddleware('/ws', {
+   *       ws: false,
+   *       target: 'http://localhost:3003'
+   *     })
+   *   ];
+   * }
+   */
+  getProxyMiddleware(): Array<any> {
+    return [];
+  }
 
   /**
    * Karma reporter configuration

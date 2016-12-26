@@ -2,7 +2,7 @@
 // import * as gulpLoadPlugins from 'gulp-load-plugins';
 // import { join } from 'path';
 //
-// import { APP_CLIENT_SRC, APP_TITLE, DOCS_DEST } from '../../config';
+// import { APP_SRC, APP_TITLE, DOCS_DEST } from '../../config';
 //
 // const plugins = <any>gulpLoadPlugins();
 //
@@ -14,9 +14,9 @@
 //
 //   let src = [
 //     'typings/index.d.ts',
-//     join(APP_CLIENT_SRC, '**/*.ts'),
-//     '!' + join(APP_CLIENT_SRC, '**/*.spec.ts'),
-//     '!' + join(APP_CLIENT_SRC, '**/*.e2e-spec.ts')
+//     join(APP_SRC, '**/*.ts'),
+//     '!' + join(APP_SRC, '**/*.spec.ts'),
+//     '!' + join(APP_SRC, '**/*.e2e-spec.ts')
 //   ];
 //
 //   return gulp.src(src)

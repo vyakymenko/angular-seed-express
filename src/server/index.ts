@@ -7,7 +7,11 @@ import * as routes from './routes';
 
 import { Init } from './db/redis';
 
-var _clientDir = '../client';
+/**
+ * Client Dir
+ * @note `dev` default.
+ */
+var _clientDir = '../../client/dev';
 var app = express();
 
 export function init(port: number, mode: string) {
@@ -25,6 +29,7 @@ export function init(port: number, mode: string) {
    * @note Dev server will only give for you middleware.
    */
   if (mode == 'dev') {
+
     app.all('/*', function(req, res, next) {
       res.header('Access-Control-Allow-Origin', '*');
       res.header('Access-Control-Allow-Headers', 'X-Requested-With');
@@ -34,7 +39,7 @@ export function init(port: number, mode: string) {
     routes.init(app);
 
     let root = path.resolve(process.cwd());
-    let clientRoot = path.resolve(process.cwd(), './dist/dev/client');
+    let clientRoot = path.resolve(process.cwd(), './dist/client/dev');
     app.use(express.static(root));
     app.use(express.static(clientRoot));
 
@@ -57,6 +62,12 @@ export function init(port: number, mode: string) {
      * Api Routes for `Production`.
      */
     routes.init(app);
+
+    /**
+     * Client Dir
+     */
+    _clientDir = '../../client/prod';
+
     /**
      * Static.
      */

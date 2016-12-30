@@ -1,6 +1,8 @@
 {
   "build.dev": [
     "clean.once",
+    "build.server",
+    "copy.server.assets",
     "build.assets.dev",
     "build.html_css",
     "build.js.dev",
@@ -22,6 +24,8 @@
     "check.tools",
     "clean.prod",
     "tslint",
+    "build.server",
+    "copy.server.assets",
     "build.assets.prod",
     "build.html_css",
     "copy.prod",
@@ -36,6 +40,8 @@
     "check.tools",
     "clean.prod",
     "tslint",
+    "build.server",
+    "copy.server.assets",
     "build.assets.prod",
     "build.html_css",
     "copy.prod",

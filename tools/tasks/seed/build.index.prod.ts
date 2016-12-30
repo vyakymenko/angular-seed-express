@@ -56,7 +56,11 @@ function transformPath() {
     if (slice_after > -1) {
       slice_after++;
     } else {
-      slice_after = 3;
+      /**
+       * For Express `4`
+       * @type {number}
+       */
+      slice_after = 4;
     }
     arguments[0] = Config.APP_BASE + path.slice(slice_after, path.length).join(sep) + `?${Date.now()}`;
     return slash(plugins.inject.transform.apply(plugins.inject.transform, arguments));

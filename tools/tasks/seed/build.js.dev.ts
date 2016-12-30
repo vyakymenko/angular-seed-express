@@ -1,4 +1,3 @@
-
 import * as gulp from 'gulp';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import * as merge from 'merge-stream';
@@ -6,12 +5,10 @@ import * as util from 'gulp-util';
 import { join/*, sep, relative*/ } from 'path';
 
 import Config from '../../config';
-import { makeTsProject, templateLocals } from '../../utils';
+import { makeTsProject, TemplateLocalsBuilder } from '../../utils';
 import { TypeScriptTask } from '../typescript_task';
 
 const plugins = <any>gulpLoadPlugins();
-
-const jsonSystemConfig = JSON.stringify(Config.SYSTEM_CONFIG_DEV);
 
 let typedBuildCounter = Config.TYPED_COMPILE_INTERVAL; // Always start with the typed build.
 
@@ -27,10 +24,10 @@ export =
         Config.TOOLS_DIR + '/manual_typings/**/*.d.ts'
       ]);
       let src = [
-        join(Config.APP_CLIENT_SRC, '**/*.ts'),
-        '!' + join(Config.APP_CLIENT_SRC, '**/*.spec.ts'),
-        '!' + join(Config.APP_CLIENT_SRC, '**/*.e2e-spec.ts'),
-        '!' + join(Config.APP_CLIENT_SRC, `**/${Config.NG_FACTORY_FILE}.ts`)
+        join(Config.APP_SRC, '**/*.ts'),
+        '!' + join(Config.APP_SRC, '**/*.spec.ts'),
+        '!' + join(Config.APP_SRC, '**/*.e2e-spec.ts'),
+        '!' + join(Config.APP_SRC, `**/${Config.NG_FACTORY_FILE}.ts`)
       ];
 
       let projectFiles = gulp.src(src);
@@ -69,14 +66,10 @@ export =
         //    .pipe(plugins.sourcemaps.write('.', {
         //      includeContent: false,
         //      sourceRoot: (file: any) =>
-        //        relative(file.path, PROJECT_ROOT + '/' + APP_CLIENT_SRC).replace(sep, '/') + '/' + APP_CLIENT_SRC
+        //        relative(file.path, PROJECT_ROOT + '/' + APP_SRC).replace(sep, '/') + '/' + APP_SRC
         //    }))
-        .pipe(plugins.template(Object.assign(
-          templateLocals(), {
-            SYSTEM_CONFIG_DEV: jsonSystemConfig
-          }
-         )))
-        .pipe(gulp.dest(Config.APP_CLIENT_DEST));
+        .pipe(plugins.template(new TemplateLocalsBuilder().withStringifiedSystemConfigDev().build()))
+        .pipe(gulp.dest(Config.APP_DEST));
       }
   };
 

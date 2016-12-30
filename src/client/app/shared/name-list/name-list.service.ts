@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { Config } from '../index';
-
-import 'rxjs/add/observable/throw';
 // import 'rxjs/add/operator/do';  // for debugging
+import { Config } from '../index';
 
 /**
  * This class provides the NameList service with methods to read names and add names.

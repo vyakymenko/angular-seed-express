@@ -4,7 +4,7 @@ import { join } from 'path';
 import * as slash from 'slash';
 
 import Config from '../../config';
-import { templateLocals } from '../../utils';
+import { TemplateLocalsBuilder } from '../../utils';
 
 const plugins = <any>gulpLoadPlugins();
 
@@ -13,12 +13,12 @@ const plugins = <any>gulpLoadPlugins();
  * Executes the build process, injecting the shims and libs into the `index.hml` for the development environment.
  */
 export = () => {
-  return gulp.src(join(Config.APP_CLIENT_SRC, 'index.html'))
+  return gulp.src(join(Config.APP_SRC, 'index.html'))
     .pipe(inject('shims'))
     .pipe(inject('libs'))
     .pipe(inject())
-    .pipe(plugins.template(templateLocals()))
-    .pipe(gulp.dest(Config.APP_CLIENT_DEST));
+    .pipe(plugins.template(new TemplateLocalsBuilder().wihtoutStringifiedEnvConfig().build()))
+    .pipe(gulp.dest(Config.APP_DEST));
 };
 
 /**
@@ -48,9 +48,9 @@ function getInjectablesDependenciesRef(name?: string) {
  */
 function mapPath(dep: any) {
   let envPath = dep.src;
-  if (envPath.startsWith(Config.APP_CLIENT_SRC) && !envPath.endsWith('.scss')) {
-    envPath = join(Config.APP_CLIENT_DEST, envPath.replace(Config.APP_CLIENT_SRC, ''));
-  } else if (envPath.startsWith(Config.APP_CLIENT_SRC) && envPath.endsWith('.scss')) {
+  if (envPath.startsWith(Config.APP_SRC) && !envPath.endsWith('.scss')) {
+    envPath = join(Config.APP_DEST, envPath.replace(Config.APP_SRC, ''));
+  } else if (envPath.startsWith(Config.APP_SRC) && envPath.endsWith('.scss')) {
     envPath = envPath.replace(Config.ASSETS_SRC, Config.CSS_DEST).replace('.scss', '.css');
   }
   return envPath;
@@ -62,8 +62,8 @@ function mapPath(dep: any) {
  */
 function transformPath() {
   return function (filepath: string) {
-    if (filepath.startsWith(`/${Config.APP_CLIENT_DEST}`)) {
-      filepath = filepath.replace(`/${Config.APP_CLIENT_DEST}`, '');
+    if (filepath.startsWith(`/${Config.APP_DEST}`)) {
+      filepath = filepath.replace(`/${Config.APP_DEST}`, '');
     }
     arguments[0] = join(Config.APP_BASE, filepath) + `?${Date.now()}`;
     return slash(plugins.inject.transform.apply(plugins.inject.transform, arguments));

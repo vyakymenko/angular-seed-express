@@ -71,7 +71,7 @@
     "@types/yargs": "^6.5.0",
     "@types/zone.js": "^0.0.27",
     "@types/redis": "^0.12.1",
-    "@types/body-parser": "^0.0.33",
+    "@types/body-parser": "^0.0.34",
     "@types/compression": "^0.0.33",
     "async": "^2.1.1",
     "autoprefixer": "^6.5.1",
@@ -155,7 +155,7 @@
     "redis": "^2.6.3",
     "core-js": "^2.4.1",
     "intl": "^1.2.5",
-    "rxjs": "~5.0.3",
+    "rxjs": "~5.2.0",
     "systemjs": "0.19.41",
     "zone.js": "^0.7.2"
   }

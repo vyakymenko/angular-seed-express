@@ -14,6 +14,7 @@ export class ProjectConfig extends SeedConfig {
   constructor() {
     super();
     // this.APP_TITLE = 'Put name of your app here';
+    // this.GOOGLE_ANALYTICS_ID = 'Your site's ID';
 
     /* Enable typeless compiler runs (faster) between typed compiler runs. */
     // this.TYPED_COMPILE_INTERVAL = 5;
@@ -27,8 +28,7 @@ export class ProjectConfig extends SeedConfig {
 
     // Add `local` third-party libraries to be injected/bundled.
     this.APP_ASSETS = [
-      ...this.APP_ASSETS,
-      // {src: `${this.APP_CLIENT_SRC}/your-path-to-lib/libs/jquery-ui.js`, inject: true, vendor: false}
+      // {src: `${this.APP_SRC}/your-path-to-lib/libs/jquery-ui.js`, inject: true, vendor: false}
       // {src: `${this.CSS_SRC}/path-to-lib/test-lib.css`, inject: true, vendor: false},
     ];
 
@@ -41,8 +41,13 @@ export class ProjectConfig extends SeedConfig {
     //
     // this.addPackagesBundles(additionalPackages);
 
+    /* Add proxy middlewar */
+    // this.PROXY_MIDDLEWARE = [
+    //   require('http-proxy-middleware')({ ws: false, target: 'http://localhost:3003' })
+    // ];
+
     /* Add to or override NPM module configurations: */
-    // this.mergeObject(this.PLUGIN_CONFIGS['browser-sync'], { ghostMode: false });
+    // this.PLUGIN_CONFIGS['browser-sync'] = { ghostMode: false };
   }
 
 }

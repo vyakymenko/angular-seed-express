@@ -1,5 +1,3 @@
-import * as express from 'express';
-import * as history from 'express-history-api-fallback';
 import * as gulp from 'gulp';
 import { resolve, join } from 'path';
 import { protractor } from 'gulp-protractor';

@@ -11,7 +11,7 @@ addons:
 
 os:
   - linux
-  - osx
+#  - osx
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi

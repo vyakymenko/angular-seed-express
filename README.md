@@ -21,7 +21,7 @@ Include:
 For Angular 2 development information and wiki, look here:
  - [Angular2-Seed](https://github.com/mgechev/angular2-seed) Wow wow it's our parent :)
  - [Angular2-Seed-WIKI](https://github.com/mgechev/angular2-seed/wiki) Wiki Information about Seed!
- - [Angular2-Seed-Advanced](https://github.com/mgechev/angular2-seed-advanced) It's a [Nathan's Walker](https://github.com/NathanWalker) child seed for multi-platform Angular2 apps.
+ - [Angular2-Seed-Advanced](https://github.com/NathanWalker/angular-seed-advanced) It's a [Nathan's Walker](https://github.com/NathanWalker) child seed for multi-platform Angular2 apps.
 
 ```bash
 git clone --depth 1 https://github.com/vyakymenko/angular2-seed-express.git

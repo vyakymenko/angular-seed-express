@@ -16,7 +16,7 @@ export = () => {
   return gulp.src(join(Config.APP_SRC, 'index.html'))
     .pipe(injectJs())
     .pipe(injectCss())
-    .pipe(plugins.template(new TemplateLocalsBuilder().wihtoutStringifiedEnvConfig().build()))
+    .pipe(plugins.template(new TemplateLocalsBuilder().withoutStringifiedEnvConfig().build()))
     .pipe(gulp.dest(Config.APP_DEST));
 };
 
@@ -62,7 +62,11 @@ function transformPath() {
        */
       slice_after = 4;
     }
-    arguments[0] = Config.APP_BASE + path.slice(slice_after, path.length).join(sep) + `?${Date.now()}`;
+    arguments[0] = Config.APP_BASE + path.slice(slice_after, path.length).join(sep);
+    const queryString = Config.QUERY_STRING_GENERATOR();
+    if (queryString) {
+      arguments[0] += `?${queryString}`;
+    }
     return slash(plugins.inject.transform.apply(plugins.inject.transform, arguments));
   };
 }

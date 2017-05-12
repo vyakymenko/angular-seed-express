@@ -2,9 +2,9 @@
 
 [![Angular 2 Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
-[![Build Status](https://travis-ci.org/vyakymenko/angular2-seed-express.svg?branch=master)](https://travis-ci.org/vyakymenko/angular2-seed-express)
-[![Dependency Status](https://david-dm.org/vyakymenko/angular2-seed-express.svg)](https://david-dm.org/vyakymenko/angular2-seed-express)
-[![devDependency Status](https://david-dm.org/vyakymenko/angular2-seed-express/dev-status.svg)](https://david-dm.org/vyakymenko/angular2-seed-express#info=devDependencies)
+[![Build Status](https://travis-ci.org/vyakymenko/angular-seed-express.svg?branch=master)](https://travis-ci.org/vyakymenko/angular2-seed-express)
+[![Dependency Status](https://david-dm.org/vyakymenko/angular-seed-express.svg)](https://david-dm.org/vyakymenko/angular2-seed-express)
+[![devDependency Status](https://david-dm.org/vyakymenko/angular-seed-express/dev-status.svg)](https://david-dm.org/vyakymenko/angular2-seed-express#info=devDependencies)
 
 **Want to feel like a full-stack Angular 2 developer but know only Express?**
 

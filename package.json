@@ -1,9 +1,9 @@
 {
-  "name": "angular-seed",
-  "version": "1.0.0",
-  "description": "Modular starter project for Angular 2 (and beyond) with statically typed build and AoT compilation",
+  "name": "angular-seed-express",
+  "version": "4.1.0",
+  "description": "Modular starter project for Angular 2 (and beyond) with statically typed build and AoT compilation with Express",
   "repository": {
-    "url": "https://github.com/mgechev/angular-seed"
+    "url": "https://github.com/vyakymenko/angular-seed-express.git"
   },
   "scripts": {
     "build.dev": "gulp build.dev --color --env-config dev",
@@ -36,7 +36,7 @@
     "start.deving": "gulp start.deving --color",
     "tasks.list": "gulp --tasks-simple --color",
     "test": "gulp test --color",
-    "e2e.ci": "gulp build.prod.rollup.aot --color && gulp build.e2e --color && gulp e2e --color",
+    "e2e.ci": "gulp build.prod --color --env-config prod && gulp build.e2e --color && gulp e2e --color",
     "tests.all": "npm test && npm run e2e.ci",
     "webdriver-start": "webdriver-manager start",
     "webdriver-update": "./node_modules/protractor/bin/webdriver-manager update",
@@ -44,6 +44,11 @@
     "serve.compodoc": "./node_modules/.bin/compodoc -s"
   },
   "author": "Minko Gechev <mgechev>",
+  "contributors": [
+    {
+      "name": "Valentyn Yakymenko <vyakymenko>"
+    }
+  ],
   "license": "MIT",
   "devDependencies": {
     "@angular/compiler-cli": "^4.1.0",
@@ -67,6 +72,9 @@
     "@types/systemjs": "^0.19.31",
     "@types/yargs": "^6.5.0",
     "@types/zone.js": "^0.5.12",
+    "@types/redis": "^0.12.36",
+    "@types/body-parser": "^1.16.3",
+    "@types/compression": "^0.0.33",
     "async": "^2.1.1",
     "autoprefixer": "^7.0.1",
     "browser-sync": "^2.17.3",
@@ -75,7 +83,6 @@
     "cssnano": "^3.7.7",
     "deep-extend": "^0.4.1",
     "event-stream": "^3.3.4",
-    "express": "~4.15.2",
     "express-history-api-fallback": "^2.0.0",
     "gulp": "^3.9.1",
     "gulp-cached": "^1.1.0",
@@ -149,6 +156,10 @@
     "intl": "^1.2.5",
     "rxjs": "^5.2.0",
     "systemjs": "0.19.41",
-    "zone.js": "^0.8.7"
+    "zone.js": "^0.8.7",
+    "express": "~4.15.2",
+    "body-parser": "^1.15.2",
+    "compression": "^1.6.2",
+    "redis": "^2.6.3"
   }
 }

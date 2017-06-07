@@ -71,6 +71,8 @@
     "check.tools",
     "clean.prod",
     "tslint",
+    "build.server",
+    "copy.server.assets",
     "build.assets.prod",
     "build.html_css",
     "copy.prod.rollup.aot",

@@ -365,7 +365,6 @@ export class SeedConfig {
     { src: 'zone.js/dist/long-stack-trace-zone.js', inject: 'libs', buildType: BUILD_TYPES.DEVELOPMENT },
     { src: 'intl/dist/Intl.min.js', inject: 'shims' },
     { src: 'systemjs/dist/system.src.js', inject: 'shims', buildType: BUILD_TYPES.DEVELOPMENT },
-    // Temporary fix. See https://github.com/angular/angular/issues/9359
     { src: 'rxjs/Rx.js', inject: 'libs', buildType: BUILD_TYPES.DEVELOPMENT }
   ];
 

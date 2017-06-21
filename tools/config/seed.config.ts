@@ -365,8 +365,7 @@ export class SeedConfig {
     { src: 'zone.js/dist/long-stack-trace-zone.js', inject: 'libs', buildType: BUILD_TYPES.DEVELOPMENT },
     { src: 'intl/dist/Intl.min.js', inject: 'shims' },
     { src: 'systemjs/dist/system.src.js', inject: 'shims', buildType: BUILD_TYPES.DEVELOPMENT },
-    // Temporary fix. See https://github.com/angular/angular/issues/9359
-    { src: '.tmp/Rx.min.js', inject: 'libs', buildType: BUILD_TYPES.DEVELOPMENT },
+    { src: 'rxjs/Rx.js', inject: 'libs', buildType: BUILD_TYPES.DEVELOPMENT }
   ];
 
   /**
@@ -435,13 +434,13 @@ export class SeedConfig {
         'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
       '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
 
-      'app/': '/app/',
+      'app/': `${this.APP_BASE}app/`,
       // For test config
       'dist/dev/': '/base/dist/dev/',
       '': 'node_modules/'
     },
     packages: {
-      app: {
+      [this.BOOTSTRAP_DIR]: {
         defaultExtension: 'js'
       }
     }

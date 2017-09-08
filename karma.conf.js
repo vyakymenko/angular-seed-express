@@ -47,6 +47,9 @@ module.exports = function (config) {
       { pattern: 'node_modules/@angular/**/*.js', included: false, watched: true },
       { pattern: 'node_modules/@angular/**/*.js.map', included: false, watched: false },
 
+      'test-config.js',
+      { pattern: 'dist/client/dev/system-config.js', watched: true, included: true },
+
       { pattern: 'dist/client/dev/**/*.js', included: false, watched: true },
       { pattern: 'dist/client/dev/**/*.html', included: false, watched: true, served: true },
       { pattern: 'dist/client/dev/**/*.css', included: false, watched: true, served: true },
@@ -54,14 +57,12 @@ module.exports = function (config) {
       // suppress annoying 404 warnings for resources, images, etc.
       { pattern: 'dist/client/dev/assets/**/*', watched: false, included: false, served: true },
 
-      'test-config.js',
-      'dist/client/dev/system-config.js',
       'test-main.js'
     ],
 
     // must go along with above, suppress annoying 404 warnings.
     proxies: {
-      '/assets/': '/base/dist/dev/assets/'
+      '/assets/': '/base/dist/client/dev/assets/'
     },
 
     // list of files to exclude

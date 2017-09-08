@@ -31,9 +31,4 @@ test_script:
   - ps: "npm --version # PowerShell" # Pass comment to PS for easier debugging
   - npm run tests.all
 
-notifications:
-    on_build_success: false
-    on_build_failure: true
-    on_build_status_changed: true
-
 cache: node_modules -> package.json

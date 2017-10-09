@@ -12,10 +12,11 @@ const plugins = <any>gulpLoadPlugins();
  * Watches the task with the given taskname.
  * @param {string} taskname - The name of the task.
  */
-export function watch(taskname: string, root: string = Config.APP_SRC) {
+export function watch(taskname: string) {
   return function () {
     let paths: string[] = [
-      join(root, '**')
+      join(Config.APP_SRC, '**'),
+      join(Config.APP_SERVER_SRC, '**')
     ].concat(Config.TEMP_FILES.map((p) => { return '!' + p; }));
 
     // watches for user defined paths to trigger compilation

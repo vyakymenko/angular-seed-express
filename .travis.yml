@@ -6,7 +6,7 @@ sudo: false
 install: true  # yarn bug
 
 addons:
-  firefox: latest
+  firefox: "45.0"
   chrome: stable
 
 os:

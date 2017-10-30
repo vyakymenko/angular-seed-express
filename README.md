@@ -12,7 +12,7 @@
 This is an express seed project for Angular 2 apps based on [Minko Gechev's](https://github.com/mgechev) [angular2-seed](https://github.com/mgechev/angular2-seed).
 Include:
  
-- Full include from [Minko Gechev's](https://github.com/mgechev) [angular2-seed](https://github.com/mgechev/angular2-seed).
+- Full include from [Minko Gechev's](https://github.com/mgechev) [angular2-seed](https://github.com/mgechev/angular-seed).
 - [Express](https://expressjs.com/) Express Node.js server for production/development build API.
 - [PM2](http://pm2.keymetrics.io/) daemon for a server running.
 - [Nginx](https://github.com/vyakymenko/angular2-nginx-config-example/blob/master/ng2-application.conf) configuration file for your server.

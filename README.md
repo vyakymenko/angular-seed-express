@@ -7,22 +7,22 @@
 [![Dependency Status](https://david-dm.org/vyakymenko/angular-seed-express.svg)](https://david-dm.org/vyakymenko/angular-seed-express)
 [![devDependency Status](https://david-dm.org/vyakymenko/angular-seed-express/dev-status.svg)](https://david-dm.org/vyakymenko/angular-seed-express#info=devDependencies)
 
-**Want to feel like a full-stack Angular 2 developer but know only Express?**
+**Want to feel like a full-stack Angular developer but know only Express?**
 
-This is an express seed project for Angular 2 apps based on [Minko Gechev's](https://github.com/mgechev) [angular2-seed](https://github.com/mgechev/angular2-seed).
+This is an express seed project for Angular apps based on [Minko Gechev's](https://github.com/mgechev) [angular-seed](https://github.com/mgechev/angular2-seed).
 Include:
  
-- Full include from [Minko Gechev's](https://github.com/mgechev) [angular2-seed](https://github.com/mgechev/angular-seed).
+- Full include from [Minko Gechev's](https://github.com/mgechev) [angular-seed](https://github.com/mgechev/angular-seed).
 - [Express](https://expressjs.com/) Express Node.js server for production/development build API.
 - [PM2](http://pm2.keymetrics.io/) daemon for a server running.
 - [Nginx](https://github.com/vyakymenko/angular2-nginx-config-example/blob/master/ng2-application.conf) configuration file for your server.
 
 # Fast start
 
-For Angular 2 development information and wiki, look here:
- - [Angular2-Seed](https://github.com/mgechev/angular2-seed) Wow wow it's our parent :)
- - [Angular2-Seed-WIKI](https://github.com/mgechev/angular2-seed/wiki) Wiki Information about Seed!
- - [Angular2-Seed-Advanced](https://github.com/NathanWalker/angular-seed-advanced) It's a [Nathan's Walker](https://github.com/NathanWalker) child seed for multi-platform Angular2 apps.
+For Angular development information and wiki, look here:
+ - [Angular-Seed](https://github.com/mgechev/angular-seed) Wow wow it's our parent :)
+ - [Angular-Seed-WIKI](https://github.com/mgechev/angular-seed/wiki) Wiki Information about Seed!
+ - [Angular-Seed-Advanced](https://github.com/NathanWalker/angular-seed-advanced) It's a [Nathan's Walker](https://github.com/NathanWalker) child seed for multi-platform Angular2 apps.
 
 ```bash
 git clone --depth 1 https://github.com/vyakymenko/angular2-seed-express.git
@@ -383,7 +383,7 @@ Here are all the awesome guys who are helping to make the project's wiki even be
 
 # Change Log
 
-You can follow the [Angular 2 change log here](https://github.com/angular/angular/blob/master/CHANGELOG.md).
+You can follow the [Angular change log here](https://github.com/angular/angular/blob/master/CHANGELOG.md).
 
 # License
 

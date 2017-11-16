@@ -1,5 +1,7 @@
 # Introduction
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/vyakymenko/angular-seed-express.svg)](https://greenkeeper.io/)
+
 [![Angular 2 Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 [![Build status](https://ci.appveyor.com/api/projects/status/lh1m985431jm79o3?svg=true)](https://ci.appveyor.com/project/vyakymenko/angular-seed-express)

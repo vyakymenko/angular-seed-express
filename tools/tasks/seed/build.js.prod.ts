@@ -17,15 +17,14 @@ const INLINE_OPTIONS = {
 /**
  * Executes the build process, transpiling the TypeScript files for the production environment.
  */
-
 export = () => {
-  let tsProject = makeTsProject({}, Config.TMP_DIR);
-  let src = [
+  const tsProject = makeTsProject({}, Config.TMP_DIR);
+  const src = [
     Config.TOOLS_DIR + '/manual_typings/**/*.d.ts',
     join(Config.TMP_DIR, '**/*.ts'),
     '!' + join(Config.TMP_DIR, `**/${Config.NG_FACTORY_FILE}.ts`)
   ];
-  let result = gulp
+  const result = gulp
     .src(src)
     .pipe(plugins.plumber())
     .pipe(plugins.inlineNg2Template(INLINE_OPTIONS))

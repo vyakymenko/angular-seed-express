@@ -11,13 +11,13 @@
 
 **Want to feel like a full-stack Angular developer but know only Express?**
 
-This is an express seed project for Angular apps based on [Minko Gechev's](https://github.com/mgechev) [angular-seed](https://github.com/mgechev/angular2-seed).
+This is an express seed project for Angular apps based on [Minko Gechev's](https://github.com/mgechev) [angular-seed](https://github.com/mgechev/angular-seed).
 Include:
  
 - Full include from [Minko Gechev's](https://github.com/mgechev) [angular-seed](https://github.com/mgechev/angular-seed).
 - [Express](https://expressjs.com/) Express Node.js server for production/development build API.
 - [PM2](http://pm2.keymetrics.io/) daemon for a server running.
-- [Nginx](https://github.com/vyakymenko/angular2-nginx-config-example/blob/master/ng2-application.conf) configuration file for your server.
+- [Nginx](https://github.com/vyakymenko/angular-nginx-config-example/blob/master/ng2-application.conf) configuration file for your server.
 
 # Fast start
 
@@ -27,8 +27,8 @@ For Angular development information and wiki, look here:
  - [Angular-Seed-Advanced](https://github.com/NathanWalker/angular-seed-advanced) It's a [Nathan's Walker](https://github.com/NathanWalker) child seed for multi-platform Angular2 apps.
 
 ```bash
-git clone --depth 1 https://github.com/vyakymenko/angular2-seed-express.git
-cd angular2-seed-express
+git clone --depth 1 https://github.com/vyakymenko/angular-seed-express.git
+cd angular-seed-express
 # install the project dependencies
 $ npm install
 # watches your files and uses livereload by default
@@ -186,7 +186,7 @@ http {
 }
 ```
 
-You can look in source file [here](https://github.com/vyakymenko/angular2-nginx-config-example/blob/master/ng2-application.conf).
+You can look in source file [here](https://github.com/vyakymenko/angular-nginx-config-example/blob/master/ng2-application.conf).
 
 
 

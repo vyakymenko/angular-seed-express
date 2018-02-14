@@ -1,6 +1,3 @@
-import * as express from 'express';
-import * as history from 'express-history-api-fallback';
-import { resolve } from 'path';
 import { spawn } from 'child_process';
 import Config from '../../config';
 
@@ -8,18 +5,6 @@ const isWin = /^win/.test(process.platform);
 
 class E2E {
   server(port: number) {
-    // const app = express();
-    // const root = resolve(process.cwd(), dir);
-    // for (const proxy of Config.PROXY_MIDDLEWARE) {
-    //   app.use(proxy);
-    // }
-    // app.use(Config.APP_BASE, express.static(root));
-    // app.use(history('index.html', {root}));
-    // return new Promise((resolve) => {
-    //   const server = app.listen(port, () => {
-    //     resolve(server);
-    //   });
-    // });
     return require('../../../dist/server/prod').init(port, 'prod');
   }
 }

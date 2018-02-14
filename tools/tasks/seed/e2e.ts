@@ -1,26 +1,31 @@
-import * as gulp from 'gulp';
-import { resolve, join } from 'path';
-import { protractor } from 'gulp-protractor';
+import { spawn } from 'child_process';
 import Config from '../../config';
 
-class Protractor {
+const isWin = /^win/.test(process.platform);
+
+class E2E {
   server(port: number) {
     return require('../../../dist/server/prod').init(port, 'prod');
   }
 }
 
 /**
- * Executes the build process, running all e2e specs using `protractor`.
+ * Serves the application and runs e2e tests.
  */
 export = (done: any) => {
   process.env.LANG = 'en_US.UTF-8';
-  new Protractor()
+  const cypress = isWin ? '.\\node_modules\\.bin\\cypress.cmd' : './node_modules/.bin/cypress';
+  new E2E()
     .server(9000)
     .then((server: any) => {
-      gulp
-        .src(join(Config.DEV_DEST, '**/*.e2e-spec.js'))
-        .pipe(protractor({ configFile: 'protractor.conf.js' }))
-        .on('error', (error: string) => { throw error; })
-        .on('end', () => { server.close(done); });
+      spawn(cypress, ['run', '--config', `baseUrl=${getBaseUrl()}`], {stdio: 'inherit'})
+        .on('close', (code: number) => {
+          server.close(done);
+          process.exit(code);
+        });
     });
 };
+
+function getBaseUrl() {
+  return `http://localhost:9000${Config.APP_BASE}`;
+}

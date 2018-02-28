@@ -303,13 +303,6 @@
   dependencies:
     "@types/node" "*"
 
-"@types/gulp-protractor@^1.0.31":
-  version "1.0.31"
-  resolved "https://registry.yarnpkg.com/@types/gulp-protractor/-/gulp-protractor-1.0.31.tgz#87f00ef9c4077c6adf4d05b3a1871deb6531da99"
-  dependencies:
-    "@types/gulp" "*"
-    "@types/node" "*"
-
 "@types/gulp-sass@^0.0.31":
   version "0.0.31"
   resolved "https://registry.yarnpkg.com/@types/gulp-sass/-/gulp-sass-0.0.31.tgz#ba874b6fa4cc1502ae425517c47a289d5cb2abd9"

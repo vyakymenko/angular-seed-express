@@ -22,7 +22,7 @@ Include:
 # Fast start
 
 For Angular development information and wiki, look here:
- - [Angular-Seed](https://github.com/mgechev/angular-seed) Wow wow it's our parent :)
+ - [Angular-Seed](https://github.com/mgechev/angular-seed)
  - [Angular-Seed-WIKI](https://github.com/mgechev/angular-seed/wiki) Wiki Information about Seed!
  - [Angular-Seed-Advanced](https://github.com/NathanWalker/angular-seed-advanced) It's a [Nathan's Walker](https://github.com/NathanWalker) child seed for multi-platform Angular apps.
 
@@ -336,52 +336,6 @@ $ src/redis-server
 [<img alt="ultrasonicsoft" src="https://avatars.githubusercontent.com/u/4145169?v=3&s=117" width="117">](https://github.com/ultrasonicsoft) |[<img alt="inkidotcom" src="https://avatars.githubusercontent.com/u/100466?v=3&s=117" width="117">](https://github.com/inkidotcom) |
 :---: |:---: |
 [ultrasonicsoft](https://github.com/ultrasonicsoft) |[inkidotcom](https://github.com/inkidotcom) |
-
-## Wiki Contributors
-
-Here are all the awesome guys who are helping to make the project's wiki even better!
-
-```
-37  Minko Gechev
-22  Clayton K. N. Passos
-15  Shyam-Chen
-14  Vincent van Proosdij
- 8  Christian Dobert
- 8  Robert van Kints
- 8  matthew harwood
- 6  Ludovic HENIN
- 5  Attila Egyed
- 3  Stefan Schüller
- 3  Patrick Hillert
- 3  Ezequiel Cicala
- 2  Nathan Walker
- 2  Yannick Koehler
- 2  Giovanni Candido da Silva
- 2  Simon Hampton
- 2  Cy Klassen
- 2  Joshua Wiens
- 2  Drake Wilson
- 2  Dinsitro
- 1  zcsongor
- 1  BouncingBit
- 1  Brian Kotek
- 1  Chris Kapilla
- 1  Dang Tung
- 1  Eddie Sun
- 1  Enrico Secondulfo
- 1  Eugene Serkin
- 1  Ishara Samantha
- 1  Myrmex
- 1  Pol Stafford
- 1  Raphael Schmitt
- 1  Sebastian Fuss
- 1  Sebastien de Salvador
- 1  The Ult
- 1  graham
- 1  kiuka
- 1  Ankit Kamboj
-```
-
 
 # Change Log
 

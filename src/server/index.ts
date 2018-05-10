@@ -11,8 +11,8 @@ import { Init } from './db/redis';
  * Client Dir
  * @note `dev` default.
  */
-var _clientDir = '../../client/dev';
-var app = express();
+const _clientDir = '../../client/dev';
+const app = express();
 
 export function init(port: number, mode: string) {
 
@@ -28,7 +28,7 @@ export function init(port: number, mode: string) {
    * Dev Mode.
    * @note Dev server will only give for you middleware.
    */
-  if (mode == 'dev') {
+  if (mode === 'dev') {
 
     app.all('/*', function(req, res, next) {
       res.header('Access-Control-Allow-Origin', '*');
@@ -38,12 +38,12 @@ export function init(port: number, mode: string) {
 
     routes.init(app);
 
-    let root = path.resolve(process.cwd());
+    const root = path.resolve(process.cwd());
     let clientRoot = path.resolve(process.cwd(), './dist/client/dev');
     app.use(express.static(root));
     app.use(express.static(clientRoot));
 
-    var renderIndex = (req: express.Request, res: express.Response) => {
+    const renderIndex = (req: express.Request, res: express.Response) => {
       res.sendFile(path.resolve(__dirname, _clientDir + '/index.html'));
     };
     app.get('/*', renderIndex);
@@ -51,8 +51,7 @@ export function init(port: number, mode: string) {
     /**
      * Api Routes for `Development`.
      */
-  }
-  else {
+  } else {
     /**
      * Prod Mode.
      * @note Prod mod will give you static + middleware.
@@ -80,7 +79,7 @@ export function init(port: number, mode: string) {
      * @param req {any}
      * @param res {any}
      */
-    var renderIndex = function (req: express.Request, res: express.Response) {
+    const renderIndex = function (req: express.Request, res: express.Response) {
       res.sendFile(path.resolve(__dirname, _clientDir + '/index.html'));
     };
 
@@ -94,10 +93,10 @@ export function init(port: number, mode: string) {
    * Server with gzip compression.
    */
   return new Promise<http.Server>((resolve, reject) => {
-    let server = app.listen(port, () => {
-      var port = server.address().port;
+    const server = app.listen(port, () => {
+      const port = server.address().port;
       console.log('App is listening on port:' + port);
       resolve(server);
     });
   });
-};
+}

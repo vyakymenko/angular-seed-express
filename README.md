@@ -40,6 +40,8 @@ $ npm start
 $ npm run build.dev
 # prod build
 $ npm run build.prod
+# prod build using different base path
+$ npm run build.prod -- --base "/foo/bar/"
 
 # run Redis
 $ src/redis-server

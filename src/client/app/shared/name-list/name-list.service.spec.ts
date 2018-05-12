@@ -3,7 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { NameListService } from './name-list.service';
 import { Config } from '../config/env.config';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 export function main() {
   describe('NameList Service', () => {

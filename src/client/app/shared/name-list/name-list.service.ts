@@ -1,17 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
 import { Config } from '../config/env.config';
 
-import { Observable } from 'rxjs/Observable';
-import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
-import { catchError } from 'rxjs/operators/catchError';
-// import { tap } from 'rxjs/operators/tap'; // for debugging
+import { Observable, of } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 
 /**
  * This class provides the NameList service with methods to read names and add names.
  */
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class NameListService {
 
   /**
@@ -27,7 +24,7 @@ export class NameListService {
    */
   get(): Observable<string[]> {
     return this.http.get<string[]>(`${Config.API}/api/name-list/static`)
-                    .pipe(
+      .pipe(
     //                tap((data: string[]) => console.log('server data:', data)), // debug
                       catchError(this.handleError));
   }
@@ -41,7 +38,8 @@ export class NameListService {
     const errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     console.error(errMsg); // log to console instead
-    return new ErrorObservable(errMsg);
+
+    return of(errMsg);
   }
 }
 

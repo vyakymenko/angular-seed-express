@@ -84,7 +84,7 @@
     "codelyzer": "^4.2.1",
     "connect-history-api-fallback": "^1.5.0",
     "cssnano": "^3.10.0",
-    "cypress": "^3.0.0",
+    "cypress": "^3.0.1",
     "deep-extend": "^0.6.0",
     "event-stream": "^3.3.4",
     "express-history-api-fallback": "^2.2.1",

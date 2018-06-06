@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as redis from 'redis';
 
-let nameData = require('../data/name.list.json');
+const nameData = require('../data/name.list.json');
 
 export function nameList(app: express.Application) {
 
@@ -10,7 +10,8 @@ export function nameList(app: express.Application) {
    * @static
    */
   app.get('/api/name-list/static',
-    (req:any, res:any, next:any) => {
+    (req: express.Request, res: express.Response,
+     next: express.NextFunction) => {
 
       res.json(nameData);
     });
@@ -20,15 +21,17 @@ export function nameList(app: express.Application) {
    * @database
    */
   app.get('/api/name-list',
-    (req:any, res:any, next:any) => {
+    (req: express.Request, res: express.Response,
+     next: express.NextFunction) => {
 
-      let RedisClient = redis.createClient(),
-          nameList: string[] = [];
+      const RedisClient = redis.createClient();
+
+      let nameList: string[] = [];
 
       RedisClient.smembers('name-list',
-        (err:any, replies:any) => {
+        (err: any, replies: any) => {
           console.log(`
-          Reply length: ${replies.length}. 
+          Reply length: ${replies.length}.
           Reply: ${replies}.`);
           nameList = replies;
           res.json(nameList);
@@ -42,14 +45,15 @@ export function nameList(app: express.Application) {
    * @database
    */
   app.post('/api/name-list',
-    (req:any, res:any, next:any) => {
+    (req: express.Request, res: express.Response,
+     next: express.NextFunction) => {
 
-      let RedisClient = redis.createClient(),
-          request = req.body;
-          // request = JSON.parse(req.body);
+      const RedisClient = redis.createClient(),
+            request = req.body;
+            // request = JSON.parse(req.body);
 
       RedisClient.sadd('name-list', request.name,
-        (err:any, replies:any) => {
+        (err: any, replies: any) => {
           console.log(`
           Reply: ${replies}.`);
 
@@ -64,16 +68,17 @@ export function nameList(app: express.Application) {
    * @database
    */
   app.delete('/api/name-list',
-    (req:any, res:any, next:any) => {
+    (req: express.Request, res: express.Response,
+     next: express.NextFunction) => {
 
-      let RedisClient = redis.createClient(),
-          request = req.body;
-          // request = JSON.parse(req.body);
+      const RedisClient = redis.createClient(),
+            request = req.body;
+            // request = JSON.parse(req.body);
 
       RedisClient.srem('name-list', request.name,
-        (err:any, replies:any) => {
+        (err: any, replies: any) => {
           console.log(`
-          Reply length: ${replies.length}. 
+          Reply length: ${replies.length}.
           Reply: ${replies}.`);
 
           res.json({success: true});

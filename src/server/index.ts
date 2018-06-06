@@ -1,4 +1,3 @@
-import * as http from 'http';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as path from 'path';
@@ -11,10 +10,11 @@ import { Init } from './db/redis';
  * Client Dir
  * @note `dev` default.
  */
-const _clientDir = '../../client/dev';
+let _clientDir = '../../client/dev';
+
 const app = express();
 
-export function init(port: number, mode: string) {
+export async function init(port: string, mode: string) {
 
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
@@ -30,7 +30,7 @@ export function init(port: number, mode: string) {
    */
   if (mode === 'dev') {
 
-    app.all('/*', function(req, res, next) {
+    app.all('/*', (req, res, next) => {
       res.header('Access-Control-Allow-Origin', '*');
       res.header('Access-Control-Allow-Headers', 'X-Requested-With');
       next();
@@ -39,7 +39,7 @@ export function init(port: number, mode: string) {
     routes.init(app);
 
     const root = path.resolve(process.cwd());
-    let clientRoot = path.resolve(process.cwd(), './dist/client/dev');
+    const clientRoot = path.resolve(process.cwd(), './dist/client/dev');
     app.use(express.static(root));
     app.use(express.static(clientRoot));
 
@@ -79,7 +79,7 @@ export function init(port: number, mode: string) {
      * @param req {any}
      * @param res {any}
      */
-    const renderIndex = function (req: express.Request, res: express.Response) {
+    const renderIndex = (req: express.Request, res: express.Response) => {
       res.sendFile(path.resolve(__dirname, _clientDir + '/index.html'));
     };
 
@@ -92,11 +92,8 @@ export function init(port: number, mode: string) {
   /**
    * Server with gzip compression.
    */
-  return new Promise<http.Server>((resolve, reject) => {
-    const server = app.listen(port, () => {
-      const port = server.address().port;
-      console.log('App is listening on port:' + port);
-      resolve(server);
-    });
-  });
+  const server: any = await app.listen(port);
+  const serverPort: string = server.address().port;
+
+  console.log(`App is listening on port: ${serverPort}`);
 }

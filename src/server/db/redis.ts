@@ -5,13 +5,13 @@ import * as redis from 'redis';
  */
 export function Init() {
 
-  let RedisClient = redis.createClient();
+  const RedisClient = redis.createClient();
 
-  RedisClient.sadd("name-list",
-    "Edsger Dijkstra",
-    "Donald Knuth",
-    "Alan Turing",
-    "Grace Hopper",
+  RedisClient.sadd('name-list',
+    'Edsger Dijkstra',
+    'Donald Knuth',
+    'Alan Turing',
+    'Grace Hopper',
     redis.print);
 
   RedisClient.quit();

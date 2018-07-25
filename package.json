@@ -1,24 +1,24 @@
 {
-  "name": "angular-seed",
-  "version": "1.0.0",
-  "description": "Modular starter project for Angular 2 (and beyond) with statically typed build and AoT compilation",
+  "name": "angular-seed-express",
+  "version": "6.0.9",
+  "description": "Modular starter project for Angular 2 (and beyond) with statically typed build and AoT compilation with Express",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mgechev/angular-seed"
+    "url": "https://github.com/vyakymenko/angular-seed-express.git"
   },
   "scripts": {
     "build.tools": "tsc && gulp build.tools --color",
     "build.dev": "gulp build.dev --color --env-config dev",
     "build.dev.watch": "gulp build.dev.watch --color",
     "build.prod": "gulp build.prod.rollup.aot --color --env-config prod --build-type prod",
-    "build.prod.aot": "gulp build.prod.rollup.aot --color --env-config prod --build-type prod",
-    "build.prod.rollup.aot": "gulp build.prod.rollup.aot --color --env-config prod --build-type prod",
     "build.test": "gulp build.test --color",
     "test.watch": "gulp test.watch --color",
     "generate.manifest": "gulp generate.manifest --color",
     "e2e": "cypress run",
     "e2e.live": "cypress open",
     "gulp": "gulp",
+    "nodemon": "./node_modules/.bin/nodemon",
+    "pm2": "./node_modules/.bin/pm2",
     "i18n": "gulp i18n.build --build-type prod && ng-xi18n -p dist/tmp/tsconfig.json --i18nFormat xlf && gulp i18n.merge",
     "lint": "gulp tslint",
     "karma": "karma",
@@ -29,7 +29,7 @@
     "serve.dev": "gulp serve.dev --color --env-config dev",
     "serve.prod": "gulp serve.prod.rollup.aot --color --env-config prod --build-type prod",
     "sme.prod": "gulp sme.prod.rollup.aot --color --env-config prod --build-type prod --preserve-source-maps",
-    "start": "gulp serve.dev --color",
+    "start": "gulp serve.dev --color & nodemon app.server.dev.js",
     "start.deving": "gulp start.deving --color",
     "tasks.list": "gulp --tasks-simple --color",
     "test": "gulp test --color",
@@ -39,6 +39,11 @@
     "serve.compodoc": "./node_modules/.bin/compodoc -s"
   },
   "author": "Minko Gechev <mgechev>",
+  "contributors": [
+    {
+      "name": "Valentyn Yakymenko <vyakymenko>"
+    }
+  ],
   "license": "MIT",
   "engines": {
     "node": ">=6.9.0",
@@ -63,7 +68,9 @@
     "@angular/platform-server": "^6.0.1",
     "@compodoc/compodoc": "^1.1.1",
     "@types/async": "^2.0.48",
+    "@types/body-parser": "^1.16.7",
     "@types/browser-sync": "^0.0.41",
+    "@types/compression": "0.0.36",
     "@types/express": "^4.11.1",
     "@types/gulp": "^4.0.5",
     "@types/gulp-filter": "^3.0.32",
@@ -84,7 +91,6 @@
     "cssnano": "^4.0.0",
     "deep-extend": "^0.6.0",
     "event-stream": "^3.3.4",
-    "express": "~4.16.3",
     "express-history-api-fallback": "^2.2.1",
     "gulp": "^3.9.1",
     "gulp-cached": "^1.1.1",
@@ -147,6 +153,13 @@
     "@angular/platform-browser-dynamic": "^6.0.1",
     "@angular/router": "^6.0.1",
     "@angular/service-worker": "^6.0.1",
+    "@types/redis": "^2.8.1",
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
+    "express": "~4.16.3",
+    "nodemon": "^1.17.5",
+    "pm2": "^3.0.0",
+    "redis": "^2.8.0",
     "core-js": "^2.5.4",
     "intl": "^1.2.5",
     "rxjs": "^6.1.0",

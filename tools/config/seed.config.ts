@@ -2,6 +2,8 @@ import { join } from 'path';
 import * as slash from 'slash';
 import { argv } from 'yargs';
 
+const magicImporter = require('node-sass-magic-importer');
+
 import {
   BuildType,
   ExtendPackages,
@@ -759,7 +761,8 @@ export class SeedConfig {
        * @type {object}
        */
       'gulp-sass': {
-        includePaths: ['./node_modules/']
+        includePaths: ['./node_modules/'],
+        importer: magicImporter()
       },
 
       /**

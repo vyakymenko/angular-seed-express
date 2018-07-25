@@ -34,9 +34,7 @@
     "minify.bundles",
     "build.index.prod",
     "sw.manifest.static",
-    "minify.index",
-
-    "deprecate.notification"
+    "minify.index"
   ],
 
   "build.test": [

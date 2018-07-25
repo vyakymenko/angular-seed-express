@@ -20,7 +20,7 @@ init:
 install:
   - ps: Install-Product node $env:nodejs_version
   - ps: $env:path = $env:appdata + "\npm;" + $env:path
-  - npm install && npm install karma-ie-launcher
+  - npm ci && npm install karma-ie-launcher
 
 test_script:
   # Output useful info for debugging.
@@ -31,4 +31,5 @@ test_script:
 #  - npm run tests.all
   - npm run test
 
-cache: node_modules -> package.json
+cache:
+  - '%APPDATA%\npm-cache'

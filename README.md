@@ -34,20 +34,20 @@ $ npm install
 # watches your files and uses livereload by default
 $ npm start
 # api document for the app
-# $ npm run build.docs
+# $ npm run compodoc
 
 # dev build
 $ npm run build.dev
 # prod build
 $ npm run build.prod
-# prod build using different base path
-$ npm run build.prod -- --base "/foo/bar/"
+
 
 # run Redis
 $ src/redis-server
 # stop Redis
 $ src/redis-cli
 $ shutdown SAVE
+
 
 # run Express server (keep in touch, only after `npm run build.prod` )
 $ node app.server.prod.js
@@ -185,7 +185,7 @@ You can look in source file [here](https://github.com/vyakymenko/angular-nginx-c
 ```js
 // Configure server Port ( keep in mind that this important if you will use reverse-proxy)
 // Dev mode will give you only middleware.
-// WARNING! DEPEND ON YOUR Angular2 SEED PROJECT API CONFIG!
+// WARNING! DEPEND ON YOUR Angular SEED PROJECT API CONFIG!
 /**
  * @ng2 Server Runner `Development`.
  */
@@ -196,7 +196,7 @@ require('./server')(9001, 'dev');
 ```js
 // Configure server Port ( keep in mind that this important if you will use reverse-proxy)
 // Prod mode give you middleware + static.
-// WARNING! DEPEND ON YOUR Angular2 SEED PROJECT API CONFIG!
+// WARNING! DEPEND ON YOUR Angular SEED PROJECT API CONFIG!
 /**
  * @ng2 Server Runner `Production`.
  */

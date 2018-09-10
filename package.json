@@ -143,7 +143,7 @@
     "yargs": "^12.0.1"
   },
   "dependencies": {
-    "@angular-devkit/build-optimizer": "^0.7.1",
+    "@angular-devkit/build-optimizer": "^0.8.1",
     "@angular/animations": "^6.0.1",
     "@angular/common": "^6.0.1",
     "@angular/compiler": "^6.0.1",

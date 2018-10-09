@@ -185,7 +185,7 @@ export class SeedConfig {
    * `index.html`.
    * @type {string}
    */
-  APP_TITLE = 'Welcome to angular-seed!';
+  APP_TITLE = 'Welcome to angular-seed-express!';
 
   /**
    * Tracking ID.
@@ -738,6 +738,7 @@ export class SeedConfig {
           ...this.PROXY_MIDDLEWARE
         ],
         port: this.PORT,
+        // port: this.SERVER_PORT,
         startPath: this.APP_BASE,
         open: argv['b'] ? false : true,
         injectChanges: false,

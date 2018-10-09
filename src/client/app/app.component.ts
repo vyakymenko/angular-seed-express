@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Config } from './shared/index';
-import './operators';
+import { Config } from './shared/config/env.config';
 
 /**
  * This class represents the main application component.
@@ -9,6 +8,7 @@ import './operators';
   moduleId: module.id,
   selector: 'sd-app',
   templateUrl: 'app.component.html',
+  styleUrls: ['app.component.css'],
 })
 export class AppComponent {
   constructor() {

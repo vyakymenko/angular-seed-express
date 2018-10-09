@@ -20,10 +20,10 @@ export =
   class BuildJsTest extends TypeScriptTask {
     run() {
       let tsProject: any;
-      let typings = gulp.src( [
+      const typings = gulp.src( [
         Config.TOOLS_DIR + '/manual_typings/**/*.d.ts'
       ] );
-      let src = [
+      const src = [
         join(Config.APP_SRC, '**/*.spec.ts')
       ];
 
@@ -60,7 +60,7 @@ export =
       return result.js
         .pipe(plugins.sourcemaps.write())
         // Use for debugging with Webstorm/IntelliJ
-        // https://github.com/mgechev/angular2-seed/issues/1220
+        // https://github.com/mgechev/angular-seed/issues/1220
         //    .pipe(plugins.sourcemaps.write('.', {
         //      includeContent: false,
         //      sourceRoot: (file: any) =>

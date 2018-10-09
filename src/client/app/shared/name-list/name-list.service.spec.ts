@@ -1,30 +1,25 @@
-import { BaseRequestOptions, ConnectionBackend, Http, Response, ResponseOptions } from '@angular/http';
 import { TestBed, async } from '@angular/core/testing';
-import { MockBackend } from '@angular/http/testing';
-
-import { Observable } from 'rxjs/Observable';
-
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { NameListService } from './name-list.service';
+import { Config } from '../config/env.config';
+
+import { Observable } from 'rxjs';
 
 export function main() {
   describe('NameList Service', () => {
+
     let nameListService: NameListService;
-    let mockBackend: MockBackend;
+    let httpMock: HttpTestingController;
 
     beforeEach(() => {
 
       TestBed.configureTestingModule({
-        providers: [
-          NameListService,
-          MockBackend,
-          BaseRequestOptions,
-          {
-            provide: Http,
-            useFactory: (backend: ConnectionBackend, options: BaseRequestOptions) => new Http(backend, options),
-            deps: [MockBackend, BaseRequestOptions]
-          }
-        ]
+        imports: [HttpClientTestingModule],
+        providers: [NameListService]
       });
+
+      nameListService = TestBed.get(NameListService);
+      httpMock = TestBed.get(HttpTestingController);
     });
 
     it('should return an Observable when get called', async(() => {
@@ -32,16 +27,22 @@ export function main() {
     }));
 
     it('should resolve to list of names when get called', async(() => {
-      let nameListService = TestBed.get(NameListService);
-      let mockBackend = TestBed.get(MockBackend);
 
-      mockBackend.connections.subscribe((c: any) => {
-        c.mockRespond(new Response(new ResponseOptions({ body: '["Dijkstra", "Hopper"]' })));
+      const expectedUsers = [
+        'Edsger Dijkstra',
+        'Donald Knuth',
+        'Alan Turing',
+        'Grace Hopper'
+      ];
+
+      let actualUsers: string[] = [];
+      nameListService.get().subscribe((users: string[]) => {
+        actualUsers = users;
       });
 
-      nameListService.get().subscribe((data: any) => {
-        expect(data).toEqual(['Dijkstra', 'Hopper']);
-      });
+      httpMock.expectOne(`${Config.API}/api/name-list/static`).flush(expectedUsers);
+
+      expect(actualUsers).toEqual(expectedUsers);
     }));
   });
 }

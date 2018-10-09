@@ -1,17 +1,17 @@
 language: node_js
-node_js:
-  - 5
+node_js: stable
 
 sudo: false
 
 install: true  # yarn bug
 
 addons:
-  firefox: "45.0"
+  firefox: latest
+  chrome: stable
 
 os:
   - linux
-  - osx
+#  - osx
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
@@ -23,7 +23,7 @@ before_install:
 before_script:
   - npm install
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then nohup bash -c "webdriver-manager start 2>&1 &"; fi  # Protractor CI
+
 
 after_failure:
   - cat /home/travis/build/vyakymenko/angular-seed-express/npm-debug.log
@@ -35,7 +35,9 @@ notifications:
   email: true
 
 cache:
-  directories: node_modules
+  directories:
+    - "$HOME/.npm"
 
 script:
-  - npm run tests.all
+#  - npm run tests.all
+  - npm run test

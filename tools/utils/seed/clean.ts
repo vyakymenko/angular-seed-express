@@ -6,7 +6,7 @@ import Config from '../../config';
 
 /**
  * Cleans the given path(s) using `rimraf`.
- * @param {string or string[]} paths - The path or list of paths to clean.
+ * @param {string | string[]} paths - The path or list of paths to clean.
  */
 export function clean(paths: string|string[]): (done: () => void) => void {
   return done => {
@@ -17,7 +17,7 @@ export function clean(paths: string|string[]): (done: () => void) => void {
       pathsToClean = [<string>paths];
     }
 
-    let promises = pathsToClean.map(p => {
+    const promises = pathsToClean.map(p => {
       return new Promise(resolve => {
         const relativePath: string = relative(Config.PROJECT_ROOT, p);
         if (relativePath.startsWith('..')) {
@@ -35,7 +35,8 @@ export function clean(paths: string|string[]): (done: () => void) => void {
         }
       });
     });
-    Promise.all(promises).then(() => done());
+    Promise.all(promises).then(() => (done || (() => 1))())
+      .catch(e => util.log(util.colors.red(`Error while removing files "${[].concat(paths).join(', ')}", ${e}`)));
   };
 }
 

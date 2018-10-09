@@ -4,10 +4,10 @@ import {
   TestBed
  } from '@angular/core/testing';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { HomeComponent } from './home.component';
-import { NameListService } from '../shared/index';
+import { NameListService } from '../shared/name-list/name-list.service';
 
 export function main() {
   describe('Home component', () => {
@@ -29,11 +29,12 @@ export function main() {
         TestBed
           .compileComponents()
           .then(() => {
-            let fixture = TestBed.createComponent(HomeComponent);
-            let homeInstance = fixture.debugElement.componentInstance;
-            let homeDOMEl = fixture.debugElement.nativeElement;
-            let mockNameListService = <MockNameListService>fixture.debugElement.injector.get(NameListService);
-            let nameListServiceSpy = spyOn(mockNameListService, 'get').and.callThrough();
+            const fixture = TestBed.createComponent(HomeComponent);
+            const homeInstance = fixture.debugElement.componentInstance;
+            const homeDOMEl = fixture.debugElement.nativeElement;
+            const mockNameListService =
+              fixture.debugElement.injector.get<any>(NameListService) as MockNameListService;
+            const nameListServiceSpy = spyOn(mockNameListService, 'get').and.callThrough();
 
             mockNameListService.returnValue = ['1', '2', '3'];
 

@@ -16,21 +16,10 @@
     "noImplicitReturns": true,
     "noImplicitUseStrict": false,
     "noFallthroughCasesInSwitch": true,
-    "typeRoots": [
-      "../../node_modules/@types",
-      "../../node_modules"
-    ],
-    "types": [
-      "node",
-      "jasmine",
-      "protractor",
-      "systemjs"
-    ]
+    "allowSyntheticDefaultImports": true,
+    "typeRoots": ["../../node_modules/@types", "../../node_modules"],
+    "types": ["node", "jasmine", "systemjs"]
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "src"
-  ],
-  "compileOnSave": false
+  "compileOnSave": false,
+  "exclude": ["app/main-prod.ts"]
 }

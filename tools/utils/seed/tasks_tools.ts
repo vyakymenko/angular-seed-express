@@ -141,7 +141,7 @@ function registerTask(taskname: string, path: string): void {
     const task = normalizeTask(require(TASK), TASK);
 
     if (changeFileManager.pristine || task.shallRun(changeFileManager.lastChangedFiles)) {
-      const result = task.run(done);
+      const result = task.run(done, changeFileManager.lastChangedFiles);
       if (result && typeof result.catch === 'function') {
         result.catch((e: any) => {
           util.log(`Error while running "${TASK}"`, e);
@@ -167,12 +167,12 @@ function readDir(root: string, cb: (taskname: string) => void) {
   walk(root);
 
   function walk(path: string) {
-    let files = readdirSync(path);
+    const files = readdirSync(path);
     for (let i = 0; i < files.length; i += 1) {
-      let file = files[i];
-      let curPath = join(path, file);
+      const file = files[i];
+      const curPath = join(path, file);
       if (lstatSync(curPath).isFile() && /\.ts$/.test(file)) {
-        let taskname = file.replace(/\.ts$/, '');
+        const taskname = file.replace(/\.ts$/, '');
         cb(taskname);
       }
     }

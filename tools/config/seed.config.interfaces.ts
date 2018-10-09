@@ -18,4 +18,12 @@ export interface ExtendPackages {
   name: string;
   path?: string;
   packageMeta?: any;
+  bundles?: any;
+}
+
+export interface SourceMapExplorerOutputFormat {
+  HTML: string;
+  JSON: string;
+  TSV: string;
+  [key: string]: string;
 }

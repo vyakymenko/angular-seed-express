@@ -15,14 +15,14 @@ import {
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
-import { ToolbarComponent } from './shared/toolbar/toolbar.component';
-import { NavbarComponent } from './shared/navbar/navbar.component';
+import { ToolbarComponent } from './core/toolbar/toolbar.component';
+import { NavbarComponent } from './core/navbar/navbar.component';
 
 export function main() {
 
   describe('App component', () => {
 
-    let config: Route[] = [
+    const config: Route[] = [
       { path: '', component: HomeComponent },
       { path: 'about', component: AboutComponent }
     ];
@@ -43,8 +43,8 @@ export function main() {
         TestBed
           .compileComponents()
           .then(() => {
-            let fixture = TestBed.createComponent(TestComponent);
-            let compiled = fixture.nativeElement;
+            const fixture = TestBed.createComponent(TestComponent);
+            const compiled = fixture.nativeElement;
 
             expect(compiled).toBeTruthy();
           });

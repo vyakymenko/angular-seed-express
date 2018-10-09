@@ -12,7 +12,7 @@ import Config from '../../config';
 const plugins = <any>gulpLoadPlugins();
 
 const isProd = Config.ENV === 'prod';
-var stylesheetType = Config.ENABLE_SCSS ? 'scss' : 'css';
+const stylesheetType = Config.ENABLE_SCSS ? 'scss' : 'css';
 
 const processors = [
   doiuse({
@@ -45,7 +45,7 @@ function lintExternalStylesheets() {
 }
 
 function getExternalStylesheets() {
-  let stylesheets = Config.ENABLE_SCSS ? Config.DEPENDENCIES : Config.APP_ASSETS;
+  const stylesheets = Config.ENABLE_SCSS ? Config.DEPENDENCIES : Config.APP_ASSETS;
   return stylesheets
     .filter(d => new RegExp(`\.${stylesheetType}$`)
     .test(d.src) && !d.vendor);

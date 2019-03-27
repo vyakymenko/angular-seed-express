@@ -117,7 +117,7 @@
     "merge-stream": "^1.0.1",
     "minimatch": "^3.0.4",
     "node-sass-magic-importer": "^5.2.0",
-    "open": "0.0.5",
+    "open": "6.0.0",
     "remap-istanbul": "^0.13.0",
     "rimraf": "^2.6.2",
     "rollup": "~0.68.0",

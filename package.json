@@ -125,7 +125,7 @@
     "rollup-plugin-includepaths": "0.2.3",
     "rollup-plugin-node-resolve": "^4.0.0",
     "run-sequence": "^2.2.1",
-    "semver": "^5.5.0",
+    "semver": "^6.0.0",
     "serve-static": "^1.13.2",
     "slash": "~2.0.0",
     "source-map-explorer": "^1.6.0",

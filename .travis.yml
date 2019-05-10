@@ -1,17 +1,19 @@
 language: node_js
-node_js: stable
+node_js:
+  "10"
 
-sudo: false
-
-install: true  # yarn bug
-
+env:
+  - CXX=g++-4.8
 addons:
   firefox: latest
   chrome: stable
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
 
-os:
-  - linux
-#  - osx
+sudo: false
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
@@ -36,8 +38,7 @@ notifications:
 
 cache:
   directories:
-    - "$HOME/.npm"
+    - node_modules
 
 script:
-#  - npm run tests.all
   - npm run test

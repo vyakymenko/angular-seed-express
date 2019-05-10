@@ -1,14 +1,14 @@
 import * as log from 'fancy-log';
 import * as gulp from 'gulp';
-import * as gulpLoadPlugins from 'gulp-load-plugins';
+import * as sourcemaps from 'gulp-sourcemaps';
+import * as plumber from 'gulp-plumber';
 import * as merge from 'merge-stream';
+import * as cached from 'gulp-cached';
 import { join /*, sep, relative*/ } from 'path';
 
 import Config from '../../config';
 import { makeTsProject, TemplateLocalsBuilder } from '../../utils';
 import { TypeScriptTask } from '../typescript_task';
-
-const plugins = <any>gulpLoadPlugins();
 
 let typedBuildCounter = Config.TYPED_COMPILE_INTERVAL; // Always start with the typed build.
 
@@ -35,7 +35,7 @@ export = class BuildJsDev extends TypeScriptTask {
     if (typedBuildCounter < Config.TYPED_COMPILE_INTERVAL) {
       isFullCompile = false;
       tsProject = makeTsProject({ isolatedModules: true });
-      projectFiles = projectFiles.pipe(plugins.cached());
+      projectFiles = projectFiles.pipe(cached());
       log('Performing typeless TypeScript compile.');
     } else {
       tsProject = makeTsProject();
@@ -43,8 +43,8 @@ export = class BuildJsDev extends TypeScriptTask {
     }
 
     result = projectFiles
-      .pipe(plugins.plumber())
-      .pipe(plugins.sourcemaps.init())
+      .pipe(plumber())
+      .pipe(sourcemaps.init())
       .pipe(tsProject())
       .on('error', () => {
         typedBuildCounter = Config.TYPED_COMPILE_INTERVAL;
@@ -58,7 +58,7 @@ export = class BuildJsDev extends TypeScriptTask {
 
     return (
       result.js
-        .pipe(plugins.sourcemaps.write())
+        .pipe(sourcemaps.write())
         // Use for debugging with Webstorm/IntelliJ
         // https://github.com/mgechev/angular-seed/issues/1220
         //    .pipe(plugins.sourcemaps.write('.', {

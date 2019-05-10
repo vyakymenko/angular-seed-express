@@ -67,9 +67,6 @@ The seed provides the following tasks:
 | `copy.prod.rollup.aot.ts`            | Copies all TypeScript files (excluding specs and e2e specs) over to the `/tmp` dir before AoT, Rollup compilation |
 | `copy.prod.ts`                       | Copies all TypeScript files (excluding specs and e2e specs) over to the `/tmp` dir |
 | `e2e.ts`                             | Runs all e2e specs using `cypress` |
-| `generate.manifest.ts`               | Generates a `manifest` file for the application |
-| `i18n.build.ts`                      | Run sequence of tasks `clean.prod`, `copy.prod` and `build.html_css` |
-| `i18n.merge.ts`                      | Add `i18n` translation in to the files  |
 | `karma.run.ts`                       | Run Karma server and using `Config.getKarmaReporters()` configuration |
 | `karma.run.with_coverage.ts`         | Run Karma server with coverage and using `Config.getKarmaReporters()` configuration |
 | `karma.run.without_coverage.ts`      | Run Karma server without coverage and using `Config.getKarmaReporters()` configuration |

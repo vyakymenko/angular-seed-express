@@ -1,19 +1,17 @@
 import * as gulp from 'gulp';
-import * as gulpLoadPlugins from 'gulp-load-plugins';
+import * as sourcemaps from 'gulp-sourcemaps';
 import * as merge from 'merge-stream';
 import * as through2 from 'through2';
 import { join } from 'path';
 
 import Config from '../../config';
 
-const plugins = <any>gulpLoadPlugins();
-
 const getTask = (target: string, destDir: string, sourceMaps: boolean = false) => {
   return gulp
     .src(join(destDir, target))
     .pipe(
       sourceMaps && Config.PRESERVE_SOURCE_MAPS
-        ? plugins.sourcemaps.init({
+        ? sourcemaps.init({
             loadMaps: true,
             largeFile: true
           })

@@ -47,21 +47,7 @@ export = (done: any) => {
   Object.keys(namedArgs)
     .filter(n => NgCompilerOptions.indexOf(n) >= 0)
     .forEach((key: string) => {
-      if (key === 'lang') {
-        const lang: string = namedArgs[key] as string;
-        const i18nFilePath = `${Config.LOCALE_DEST}/messages.${lang}.xlf`;
-        const isExists = existsSync(i18nFilePath);
-        if (isExists) {
-          args.push('--i18nFile', i18nFilePath);
-          args.push('--locale', lang);
-          args.push('--i18nFormat', 'xlf');
-        } else {
-          log(colors.gray('Translation file is not found'), colors.yellow(i18nFilePath));
-          log(colors.gray(`Use 'npm run i18n' command to create your translation file`));
-        }
-      } else {
-        args.push('--' + key, namedArgs[key]);
-      }
+      args.push('--' + key, namedArgs[key]);
     });
 
   return Promise.resolve(main(args)).catch((e: Error) => {

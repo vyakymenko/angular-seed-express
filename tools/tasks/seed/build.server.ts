@@ -1,13 +1,11 @@
 import * as gulp from 'gulp';
-import * as gulpLoadPlugins from 'gulp-load-plugins';
+import * as cached from 'gulp-cached';
 import * as merge from 'merge-stream';
 import { join/*, sep, relative*/ } from 'path';
 
 import Config from '../../config';
 import { makeTsProject, TemplateLocalsBuilder } from '../../utils';
 import { TypeScriptTask } from '../typescript_task';
-
-const plugins = <any>gulpLoadPlugins();
 
 let typedBuildCounter = Config.TYPED_COMPILE_INTERVAL; // Always start with the typed build.
 
@@ -34,7 +32,7 @@ export =
       if (typedBuildCounter < Config.TYPED_COMPILE_INTERVAL) {
         isFullCompile = false;
         tsProject = makeTsProject({isolatedModules: true});
-        projectFiles = projectFiles.pipe(plugins.cached());
+        projectFiles = projectFiles.pipe(cached());
       } else {
         tsProject = makeTsProject();
         projectFiles = merge(typings, projectFiles);

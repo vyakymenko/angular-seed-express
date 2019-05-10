@@ -1,12 +1,9 @@
 import * as gulp from 'gulp';
-import * as gulpLoadPlugins from 'gulp-load-plugins';
 import { join } from 'path';
 import * as slash from 'slash';
 
 import Config from '../../config';
 import { TemplateLocalsBuilder } from '../../utils';
-
-const plugins = <any>gulpLoadPlugins();
 
 /**
  * Executes the build process, injecting the shims and libs into the `index.hml` for the development environment.

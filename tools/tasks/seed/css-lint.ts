@@ -1,15 +1,13 @@
 import * as colorguard from 'colorguard';
 import * as doiuse from 'doiuse';
 import * as gulp from 'gulp';
-import * as gulpLoadPlugins from 'gulp-load-plugins';
+import * as cached from 'gulp-cached';
 import * as merge from 'merge-stream';
 import * as reporter from 'postcss-reporter';
 import * as stylelint from 'stylelint';
 import { join } from 'path';
 
 import Config from '../../config';
-
-const plugins = <any>gulpLoadPlugins();
 
 const isProd = Config.ENV === 'prod';
 const stylesheetType = Config.ENABLE_SCSS ? 'scss' : 'css';
@@ -30,18 +28,18 @@ function lintComponentStylesheets() {
     join(Config.APP_SRC, '**', `*.${stylesheetType}`),
     `!${join(Config.APP_SRC, 'assets', '**', '*.scss')}`,
     `!${join(Config.CSS_SRC, '**', '*.css')}`
-  ]).pipe(isProd ? plugins.cached('css-lint') : plugins.util.noop())
+  ]).pipe(isProd ? cached('css-lint') : () => {})
     .pipe(Config.ENABLE_SCSS ? plugins.sassLint() : plugins.postcss(processors))
-    .pipe(Config.ENABLE_SCSS ? plugins.sassLint.format() : plugins.util.noop())
-    .pipe(Config.ENABLE_SCSS ? plugins.sassLint.failOnError() : plugins.util.noop());
+    .pipe(Config.ENABLE_SCSS ? plugins.sassLint.format() : () => {})
+    .pipe(Config.ENABLE_SCSS ? plugins.sassLint.failOnError() : () => {});
 }
 
 function lintExternalStylesheets() {
   return gulp.src(getExternalStylesheets().map(r => r.src))
-    .pipe(isProd ? plugins.cached('css-lint') : plugins.util.noop())
+    .pipe(isProd ? cached('css-lint') : () => {})
     .pipe(Config.ENABLE_SCSS ? plugins.sassLint() : plugins.postcss(processors))
-    .pipe(Config.ENABLE_SCSS ? plugins.sassLint.format() : plugins.util.noop())
-    .pipe(Config.ENABLE_SCSS ? plugins.sassLint.failOnError() : plugins.util.noop());
+    .pipe(Config.ENABLE_SCSS ? plugins.sassLint.format() : () => {})
+    .pipe(Config.ENABLE_SCSS ? plugins.sassLint.failOnError() : () => {});
 }
 
 function getExternalStylesheets() {

@@ -1,5 +1,6 @@
 import * as gulp from 'gulp';
 import * as sourcemaps from 'gulp-sourcemaps';
+import * as uglify from 'gulp-uglify';
 import * as merge from 'merge-stream';
 import * as through2 from 'through2';
 import { join } from 'path';
@@ -18,12 +19,12 @@ const getTask = (target: string, destDir: string, sourceMaps: boolean = false) =
         : through2.obj()
     )
     .pipe(
-      plugins.uglify({
+      uglify({
         compress: true,
         mangle: true
       })
     )
-    .pipe(sourceMaps && Config.PRESERVE_SOURCE_MAPS ? plugins.sourcemaps.write('.') : through2.obj())
+    .pipe(sourceMaps && Config.PRESERVE_SOURCE_MAPS ? sourcemaps.write('.') : through2.obj())
     .pipe(gulp.dest(destDir));
 };
 

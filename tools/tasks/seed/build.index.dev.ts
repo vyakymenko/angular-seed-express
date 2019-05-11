@@ -1,4 +1,6 @@
 import * as gulp from 'gulp';
+import * as gInject from 'gulp-inject';
+import * as template from 'gulp-template';
 import { join } from 'path';
 import * as slash from 'slash';
 
@@ -15,7 +17,7 @@ export = () => {
     .pipe(inject('libs'))
     .pipe(inject())
     .pipe(
-      plugins.template(
+      template(
         new TemplateLocalsBuilder().withoutStringifiedEnvConfig().build(),
         Config.TEMPLATE_CONFIG
       )
@@ -28,7 +30,7 @@ export = () => {
  * @param {string} name - The file to be injected.
  */
 function inject(name?: string) {
-  return plugins.inject(
+  return gInject(
     gulp.src(getInjectablesDependenciesRef(name), { read: false }),
     {
       name,
@@ -78,7 +80,7 @@ function transformPath() {
       arguments[0] += `?${queryString}`;
     }
     return slash(
-      plugins.inject.transform.apply(plugins.inject.transform, arguments)
+      gInject.transform.apply(gInject.transform, arguments)
     );
   };
 }

@@ -1,4 +1,5 @@
 import * as gulp from 'gulp';
+import tslint from 'gulp-tslint';
 import { join } from 'path';
 
 import Config from '../../config';
@@ -17,8 +18,8 @@ export = () => {
   ];
 
   return gulp.src(src, {'base': '.'})
-    .pipe(plugins.tslint())
-    .pipe(plugins.tslint.report({
+    .pipe(tslint())
+    .pipe(tslint.report({
       emitError: require('is-ci') || Config.FORCE_TSLINT_EMIT_ERROR
     }));
 };

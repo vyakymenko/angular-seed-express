@@ -1,5 +1,7 @@
 import * as gulp from 'gulp';
-import * as plumber from 'gulp-plumber';
+import * as sourcemaps from 'gulp-sourcemaps';
+import * as template from 'gulp-template';
+import * as rename from 'gulp-rename';
 import { join } from 'path';
 import * as through2 from 'through2';
 
@@ -22,9 +24,8 @@ export = () => {
   const src = [join(Config.TMP_DIR, 'bundle.js')];
   const result = gulp
     .src(src)
-    .pipe(plumber())
     .pipe(
-      Config.PRESERVE_SOURCE_MAPS ? plugins.sourcemaps.init({ loadMaps: true, largeFile: true }) : through2.obj()
+      Config.PRESERVE_SOURCE_MAPS ? sourcemaps.init({ loadMaps: true, largeFile: true }) : through2.obj()
     )
     .pipe(tsProject())
     .once('error', function(e: any) {
@@ -32,9 +33,9 @@ export = () => {
     });
 
   return result.js
-    .pipe(Config.PRESERVE_SOURCE_MAPS ? plugins.sourcemaps.write() : through2.obj())
-    .pipe(plugins.template(new TemplateLocalsBuilder().build(), Config.TEMPLATE_CONFIG))
-    .pipe(plugins.rename(Config.JS_PROD_APP_BUNDLE))
+    .pipe(Config.PRESERVE_SOURCE_MAPS ? sourcemaps.write() : through2.obj())
+    .pipe(template(new TemplateLocalsBuilder().build(), Config.TEMPLATE_CONFIG))
+    .pipe(rename(Config.JS_PROD_APP_BUNDLE))
     .pipe(gulp.dest(Config.JS_DEST))
     .on('error', (e: any) => {
       console.log(e);

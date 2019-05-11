@@ -1,4 +1,6 @@
 import * as gulp from 'gulp';
+import * as concat from 'gulp-concat';
+import * as replace from 'gulp-replace';
 import * as merge from 'merge-stream';
 
 import Config from '../../config';
@@ -26,8 +28,8 @@ function getShims() {
  */
 function bundleShims() {
   return gulp.src(getShims())
-    .pipe(plugins.concat(Config.JS_PROD_SHIMS_BUNDLE))
+    .pipe(concat(Config.JS_PROD_SHIMS_BUNDLE))
     // Strip the first (global) 'use strict' added by reflect-metadata, but don't strip any others to avoid unintended scope leaks.
-    .pipe(plugins.replace(/('|")use strict\1;var Reflect;/, 'var Reflect;'))
+    .pipe(replace(/('|")use strict\1;var Reflect;/, 'var Reflect;'))
     .pipe(gulp.dest(Config.JS_DEST));
 }

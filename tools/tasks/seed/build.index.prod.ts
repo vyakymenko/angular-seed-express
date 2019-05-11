@@ -1,12 +1,11 @@
 import * as gulp from 'gulp';
-import * as gulpLoadPlugins from 'gulp-load-plugins';
+import * as gInject from 'gulp-inject';
+import * as template from 'gulp-template';
 import { join, sep, normalize } from 'path';
 import * as slash from 'slash';
 
 import Config from '../../config';
 import { TemplateLocalsBuilder } from '../../utils';
-
-const plugins = <any>gulpLoadPlugins();
 
 /**
  * Executes the build process, injecting the JavaScript and CSS dependencies into the `index.html` for the production
@@ -18,7 +17,7 @@ export = () => {
     .pipe(injectJs())
     .pipe(injectCss())
     .pipe(
-      plugins.template(
+      template(
         new TemplateLocalsBuilder().withoutStringifiedEnvConfig().build(),
         Config.TEMPLATE_CONFIG
       )
@@ -31,7 +30,7 @@ export = () => {
  * @param {Array<string>} files - The files to be injected.
  */
 function inject(...files: Array<string>) {
-  return plugins.inject(gulp.src(files, { read: false }), {
+  return gInject(gulp.src(files, { read: false }), {
     files,
     transform: transformPath()
   });
@@ -78,7 +77,7 @@ function transformPath() {
       arguments[0] += `?${queryString}`;
     }
     return slash(
-      plugins.inject.transform.apply(plugins.inject.transform, arguments)
+      gInject.transform.apply(gInject.transform, arguments)
     );
   };
 }

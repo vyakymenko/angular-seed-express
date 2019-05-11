@@ -2,6 +2,7 @@ import * as colorguard from 'colorguard';
 import * as doiuse from 'doiuse';
 import * as gulp from 'gulp';
 import * as cached from 'gulp-cached';
+import * as postcss from 'gulp-postcss';
 import * as merge from 'merge-stream';
 import * as reporter from 'postcss-reporter';
 import * as stylelint from 'stylelint';
@@ -28,18 +29,18 @@ function lintComponentStylesheets() {
     join(Config.APP_SRC, '**', `*.${stylesheetType}`),
     `!${join(Config.APP_SRC, 'assets', '**', '*.scss')}`,
     `!${join(Config.CSS_SRC, '**', '*.css')}`
-  ]).pipe(isProd ? cached('css-lint') : () => {})
-    .pipe(Config.ENABLE_SCSS ? plugins.sassLint() : plugins.postcss(processors))
-    .pipe(Config.ENABLE_SCSS ? plugins.sassLint.format() : () => {})
-    .pipe(Config.ENABLE_SCSS ? plugins.sassLint.failOnError() : () => {});
+    ]).pipe(isProd ? cached('css-lint') : () => {})
+    .pipe(Config.ENABLE_SCSS ? sassLint() : postcss(processors))
+    .pipe(Config.ENABLE_SCSS ? sassLint.format() : () => {})
+    .pipe(Config.ENABLE_SCSS ? sassLint.failOnError() : () => {});
 }
 
 function lintExternalStylesheets() {
   return gulp.src(getExternalStylesheets().map(r => r.src))
     .pipe(isProd ? cached('css-lint') : () => {})
-    .pipe(Config.ENABLE_SCSS ? plugins.sassLint() : plugins.postcss(processors))
-    .pipe(Config.ENABLE_SCSS ? plugins.sassLint.format() : () => {})
-    .pipe(Config.ENABLE_SCSS ? plugins.sassLint.failOnError() : () => {});
+    .pipe(Config.ENABLE_SCSS ? sassLint() : postcss(processors))
+    .pipe(Config.ENABLE_SCSS ? sassLint.format() : () => {})
+    .pipe(Config.ENABLE_SCSS ? sassLint.failOnError() : () => {});
 }
 
 function getExternalStylesheets() {

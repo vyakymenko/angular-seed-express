@@ -1,7 +1,6 @@
 import * as log from 'fancy-log';
 import * as gulp from 'gulp';
 import * as sourcemaps from 'gulp-sourcemaps';
-import * as plumber from 'gulp-plumber';
 import * as merge from 'merge-stream';
 import * as cached from 'gulp-cached';
 import { join /*, sep, relative*/ } from 'path';
@@ -43,7 +42,6 @@ export = class BuildJsDev extends TypeScriptTask {
     }
 
     result = projectFiles
-      .pipe(plumber())
       .pipe(sourcemaps.init())
       .pipe(tsProject())
       .on('error', () => {

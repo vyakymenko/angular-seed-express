@@ -1,4 +1,5 @@
 import * as gulp from 'gulp';
+import * as sourcemaps from 'gulp-sourcemaps';
 import * as gulpLoadPlugins from 'gulp-load-plugins';
 import { join } from 'path';
 
@@ -20,9 +21,8 @@ export = () => {
   ];
   const result = gulp
     .src(src, { base: './' })
-    .pipe(plugins.plumber())
-    .pipe(plugins.sourcemaps.init())
+    .pipe(sourcemaps.init())
     .pipe(tsProject());
 
-  return result.js.pipe(plugins.sourcemaps.write()).pipe(gulp.dest('./'));
+  return result.js.pipe(sourcemaps.write()).pipe(gulp.dest('./'));
 };

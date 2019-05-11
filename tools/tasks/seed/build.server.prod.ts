@@ -1,5 +1,7 @@
 import * as gulp from 'gulp';
 import * as cached from 'gulp-cached';
+import * as sourcemaps from 'gulp-sourcemaps';
+import * as template from 'gulp-template';
 import * as merge from 'merge-stream';
 import { join/*, sep, relative*/ } from 'path';
 
@@ -16,7 +18,7 @@ let typedBuildCounter = Config.TYPED_COMPILE_INTERVAL; // Always start with the 
 export =
   class BuildServerDev extends TypeScriptTask {
     run() {
-      const tsProject: any;
+      let tsProject: any;
       const typings = gulp.src([
         Config.TOOLS_DIR + '/manual_typings/**/*.d.ts'
       ]);
@@ -39,8 +41,7 @@ export =
       }
 
       result = projectFiles
-        .pipe(plugins.plumber())
-        .pipe(plugins.sourcemaps.init())
+        .pipe(sourcemaps.init())
         .pipe(tsProject())
         .on('error', () => {
           typedBuildCounter = Config.TYPED_COMPILE_INTERVAL;
@@ -53,15 +54,8 @@ export =
       }
 
       return result.js
-        .pipe(plugins.sourcemaps.write())
-        // Use for debugging with Webstorm/IntelliJ
-        // https://github.com/mgechev/angular2-seed/issues/1220
-        //    .pipe(plugins.sourcemaps.write('.', {
-        //      includeContent: false,
-        //      sourceRoot: (file: any) =>
-        //        relative(file.path, PROJECT_ROOT + '/' + APP_SRC).replace(sep, '/') + '/' + APP_SRC
-        //    }))
-        .pipe(plugins.template(new TemplateLocalsBuilder().withStringifiedSystemConfigDev().build()))
+        .pipe(sourcemaps.write())
+        .pipe(template(new TemplateLocalsBuilder().withStringifiedSystemConfigDev().build()))
         .pipe(gulp.dest(Config.APP_SERVER_DEST));
     }
   };

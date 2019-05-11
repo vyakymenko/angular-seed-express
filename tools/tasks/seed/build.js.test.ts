@@ -1,6 +1,7 @@
 import * as log from 'fancy-log';
 import * as gulp from 'gulp';
 import * as cached from 'gulp-cached';
+import * as sourcemaps from 'gulp-sourcemaps';
 import * as merge from 'merge-stream';
 import { join } from 'path';
 
@@ -41,8 +42,7 @@ export = class BuildJsTest extends TypeScriptTask {
 
     //noinspection TypeScriptUnresolvedFunction
     result = projectFiles
-      .pipe(plugins.plumber())
-      .pipe(plugins.sourcemaps.init())
+      .pipe(sourcemaps.init())
       .pipe(tsProject())
       .on('error', () => {
         typedBuildCounter = Config.TYPED_COMPILE_INTERVAL;
@@ -55,14 +55,7 @@ export = class BuildJsTest extends TypeScriptTask {
     }
 
     return result.js
-      .pipe(plugins.sourcemaps.write())
-      // Use for debugging with Webstorm/IntelliJ
-      // https://github.com/mgechev/angular-seed/issues/1220
-      //    .pipe(plugins.sourcemaps.write('.', {
-      //      includeContent: false,
-      //      sourceRoot: (file: any) =>
-      //        relative(file.path, PROJECT_ROOT + '/' + APP_SRC).replace(sep, '/') + '/' + APP_SRC
-      //    }))
+      .pipe(sourcemaps.write())
       .pipe(gulp.dest(Config.APP_DEST));
   }
 };

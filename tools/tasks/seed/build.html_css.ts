@@ -3,7 +3,12 @@ import * as autoprefixer from 'autoprefixer';
 import * as cssnano from 'cssnano';
 import * as log from 'fancy-log';
 import * as gulp from 'gulp';
-import * as gulpLoadPlugins from 'gulp-load-plugins';
+import * as sass from 'gulp-sass';
+import * as postcss from 'gulp-postcss';
+import * as sourcemaps from 'gulp-sourcemaps';
+import * as cached from 'gulp-cached';
+import * as concatCss from 'gulp-concat-css';
+import * as progeny from 'gulp-progeny';
 import * as merge from 'merge-stream';
 import * as filter from 'gulp-filter';
 import * as through2 from 'through2';
@@ -12,7 +17,6 @@ import { join } from 'path';
 import Config from '../../config';
 import { CssTask } from '../css_task';
 
-const plugins = <any>gulpLoadPlugins();
 const gulpConcatCssConfig = Config.getPluginConfig('gulp-concat-css');
 
 const processors = [
@@ -66,11 +70,11 @@ function processComponentStylesheets() {
 function processComponentScss() {
 
   return getSCSSFiles('process-component-scss', [appSCSSFiles], [abstractSCSSFiles])
-    .pipe(isProd ? through2.obj() : plugins.sourcemaps.init())
-    .pipe(plugins.sass(Config.getPluginConfig('gulp-sass')).on('error', plugins.sass.logError))
-    .pipe(plugins.postcss(processors))
+    .pipe(isProd ? through2.obj() : sourcemaps.init())
+    .pipe(sass(Config.getPluginConfig('gulp-sass')).on('error', sass.logError))
+    .pipe(postcss(processors))
     .on('error', reportPostCssError)
-    .pipe(isProd ? through2.obj() : plugins.sourcemaps.write('', {
+    .pipe(isProd ? through2.obj() : sourcemaps.write('', {
       sourceMappingURL: (file: any) => {
         // write absolute urls to the map files
         return `${Config.APP_BASE}${file.relative}.map`;
@@ -88,8 +92,8 @@ function getSCSSFiles(cacheName: string, filesToCompile: string[], filesToExclud
     filesToExclude.map((path: string) => { return '!' + path; })
   );
   return gulp.src(allFiles)
-    .pipe(plugins.cached(cacheName))
-    .pipe(plugins.progeny())
+    .pipe(cached(cacheName))
+    .pipe(progeny())
     .pipe(filter(filteredFiles));
 }
 
@@ -102,8 +106,8 @@ function processComponentCss() {
     join(Config.APP_SRC, '**', '*.css'),
     '!' + join(Config.APP_SRC, 'assets', '**', '*.css')
   ])
-    .pipe(isProd ? plugins.cached('process-component-css') : through2.obj())
-    .pipe(plugins.postcss(processors))
+    .pipe(isProd ? cached('process-component-css') : through2.obj())
+    .pipe(postcss(processors))
     .on('error', reportPostCssError)
     .pipe(gulp.dest(isProd ? Config.TMP_DIR : Config.APP_DEST));
 }
@@ -121,8 +125,8 @@ function processExternalStylesheets() {
  */
 function processAllExternalStylesheets() {
   return merge(getExternalCssStream(), getExternalScssStream())
-    .pipe(isProd ? plugins.concatCss(gulpConcatCssConfig.targetFile, gulpConcatCssConfig.options) : through2.obj())
-    .pipe(plugins.postcss(processors))
+    .pipe(isProd ? concatCss(gulpConcatCssConfig.targetFile, gulpConcatCssConfig.options) : through2.obj())
+    .pipe(postcss(processors))
     .on('error', reportPostCssError)
     .pipe(gulp.dest(Config.CSS_DEST));
 }
@@ -132,7 +136,7 @@ function processAllExternalStylesheets() {
  */
 function getExternalCssStream() {
   return gulp.src(getExternalCss())
-    .pipe(isProd ? plugins.cached('process-external-css') : through2.obj());
+    .pipe(isProd ? cached('process-external-css') : through2.obj());
 }
 
 /**
@@ -147,7 +151,7 @@ function getExternalCss() {
  */
 function getExternalScssStream() {
   return getSCSSFiles('process-external-scss', getExternalScss(), [abstractSCSSFiles])
-    .pipe(plugins.sass(Config.getPluginConfig('gulp-sass')).on('error', plugins.sass.logError));
+    .pipe(sass(Config.getPluginConfig('gulp-sass')).on('error', sass.logError));
 }
 
 /**
@@ -164,8 +168,8 @@ function getExternalScss() {
  */
 function processExternalCss() {
   return getExternalCssStream()
-    .pipe(plugins.postcss(processors))
-    .pipe(isProd ? plugins.concatCss(gulpConcatCssConfig.targetFile, gulpConcatCssConfig.options) : through2.obj())
+    .pipe(postcss(processors))
+    .pipe(isProd ? concatCss(gulpConcatCssConfig.targetFile, gulpConcatCssConfig.options) : through2.obj())
     .on('error', reportPostCssError)
     .pipe(gulp.dest(Config.CSS_DEST));
 }

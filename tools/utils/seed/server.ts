@@ -1,13 +1,11 @@
 import * as express from 'express';
 import * as fallback from 'express-history-api-fallback';
-import * as gulpLoadPlugins from 'gulp-load-plugins';
+import * as watch from 'gulp-watch';
 import * as openResource from 'open';
 import { join, resolve } from 'path';
 
 import Config from '../../config';
 import * as codeChangeTool from './code_change_tools';
-
-const plugins = <any>gulpLoadPlugins();
 
 /**
  * Serves the Single Page Application. More specifically, calls the `listen` method, which itself launches BrowserSync.
@@ -44,7 +42,7 @@ export function watchAppFiles(path: string, fileChangeCallback: (e: any, done: (
       changesWaiting = null;
     }
   };
-  plugins.watch(paths, (e: any) => {
+  watch(paths, (e: any) => {
     if (busyWithCall) {
       changesWaiting = e;
       return;

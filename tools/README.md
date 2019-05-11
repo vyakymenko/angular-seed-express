@@ -1,6 +1,6 @@
 # Tools documentation
 
-This document contains information about the tools section of the `angular-seed`.
+This document contains information about the tools section of the `angular-seed-express`.
 
 ## General Information
 

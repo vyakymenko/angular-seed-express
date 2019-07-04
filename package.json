@@ -36,7 +36,9 @@
     "e2e.ci": "npm run build.prod && gulp e2e --color",
     "tests.all": "npm test && npm run e2e.ci",
     "compodoc": "./node_modules/.bin/compodoc -p src/client/tsconfig.json",
-    "serve.compodoc": "./node_modules/.bin/compodoc -s"
+    "serve.compodoc": "./node_modules/.bin/compodoc -s",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "author": "Valentyn Yakymenko <vyakymenko>",
   "license": "MIT",
@@ -162,6 +164,8 @@
     "redis": "^2.8.0",
     "rxjs": "^6.2.2",
     "systemjs": "0.21.5",
-    "zone.js": "~0.8.26"
-  }
+    "zone.js": "~0.8.26",
+    "snyk": "^1.189.0"
+  },
+  "snyk": true
 }

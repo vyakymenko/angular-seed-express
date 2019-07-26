@@ -12,3 +12,21 @@ patch:
         patched: '2019-07-04T03:12:54.438Z'
     - pm2 > vizion > async > lodash:
         patched: '2019-07-04T03:12:54.438Z'
+    - snyk > lodash:
+        patched: '2019-07-26T07:47:48.980Z'
+    - snyk > @snyk/dep-graph > lodash:
+        patched: '2019-07-26T07:47:48.980Z'
+    - snyk > inquirer > lodash:
+        patched: '2019-07-26T07:47:48.980Z'
+    - snyk > snyk-config > lodash:
+        patched: '2019-07-26T07:47:48.980Z'
+    - snyk > snyk-nodejs-lockfile-parser > lodash:
+        patched: '2019-07-26T07:47:48.980Z'
+    - snyk > snyk-nuget-plugin > lodash:
+        patched: '2019-07-26T07:47:48.980Z'
+    - snyk > @snyk/dep-graph > graphlib > lodash:
+        patched: '2019-07-26T07:47:48.980Z'
+    - snyk > snyk-go-plugin > graphlib > lodash:
+        patched: '2019-07-26T07:47:48.980Z'
+    - snyk > snyk-nodejs-lockfile-parser > graphlib > lodash:
+        patched: '2019-07-26T07:47:48.980Z'

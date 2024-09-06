@@ -144,7 +144,7 @@
     "yargs": "^13.1.0"
   },
   "dependencies": {
-    "@angular-devkit/build-optimizer": "^0.13.1",
+    "@angular-devkit/build-optimizer": "^0.1200.0",
     "@angular/animations": "7.2.0",
     "@angular/common": "7.2.0",
     "@angular/compiler": "7.2.0",
@@ -159,8 +159,8 @@
     "core-js": "2.6.5",
     "express": "~4.16.3",
     "intl": "^1.2.5",
-    "nodemon": "1.18.11",
-    "pm2": "^4.3.0",
+    "nodemon": "3.0.0",
+    "pm2": "^5.4.0",
     "redis": "^2.8.0",
     "rxjs": "^6.2.2",
     "systemjs": "0.21.5",
